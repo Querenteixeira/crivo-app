@@ -346,6 +346,142 @@
   .cx-result{ margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:600; color:var(--sea); }
   .cx-note{ font-size:11.5px; color:var(--muted); margin:6px 0 0; }
 
+  /* ---- topbar (design polish) ---- */
+  main{ position:relative; }
+  main::before{
+    content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(500px 320px at 78% -6%, rgba(198,135,63,0.14), transparent 60%),
+      radial-gradient(460px 300px at 8% 4%, rgba(123,108,217,0.12), transparent 60%);
+  }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:26px; gap:14px; }
+  .tb-left .hi{ font-size:11px; font-family:'JetBrains Mono',monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  .tb-left .who{ font-size:15px; font-weight:600; }
+  .tb-right{ display:flex; align-items:center; gap:10px; }
+  .icon-btn{ all:unset; cursor:pointer; position:relative; width:40px; height:40px; border-radius:12px; background:var(--card-bg); border:1px solid var(--line); box-shadow:var(--shadow-sm); display:flex; align-items:center; justify-content:center; color:var(--ink); transition:border-color .12s, transform .12s; }
+  .icon-btn:hover{ border-color:var(--copper); transform:translateY(-1px); }
+  .icon-btn svg{ width:18px; height:18px; }
+  .icon-btn .dot{ position:absolute; top:9px; right:10px; width:8px; height:8px; border-radius:50%; background:var(--coral); border:2px solid var(--card-bg); }
+  .tb-av{ width:40px; height:40px; border-radius:50%; background:linear-gradient(140deg, var(--copper-soft), var(--copper)); color:var(--void); display:flex; align-items:center; justify-content:center; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; font-size:14px; cursor:pointer; box-shadow:var(--shadow-sm); }
+
+  /* ---- notifications slide-over ---- */
+  .sheet-backdrop{ position:fixed; inset:0; background:rgba(20,17,28,0.45); backdrop-filter:blur(3px); z-index:95; opacity:0; pointer-events:none; transition:opacity .25s; }
+  .sheet-backdrop.open{ opacity:1; pointer-events:auto; }
+  .sheet{ position:fixed; top:0; right:0; height:100%; width:min(380px,92vw); background:var(--card-bg); box-shadow:var(--shadow-lg); z-index:96; transform:translateX(100%); transition:transform .3s cubic-bezier(.2,.8,.2,1); display:flex; flex-direction:column; }
+  .sheet.open{ transform:translateX(0); }
+  .sheet .sh-head{ display:flex; align-items:center; justify-content:space-between; padding:20px 22px; border-bottom:1px solid var(--line); }
+  .sheet .sh-head h3{ font-size:17px; }
+  .sheet .sh-close{ all:unset; cursor:pointer; color:var(--muted); }
+  .sheet .sh-close svg{ width:18px; height:18px; }
+  .noti-list{ overflow-y:auto; flex:1; }
+  .noti{ display:flex; gap:12px; padding:15px 22px; border-bottom:1px solid var(--line); }
+  .noti.unread{ background:color-mix(in srgb, var(--copper) 5%, transparent); }
+  .noti .nic{ width:34px; height:34px; border-radius:10px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .noti .nic svg{ width:16px; height:16px; }
+  .noti b{ font-size:13px; display:block; margin-bottom:2px; }
+  .noti p{ font-size:12px; color:var(--muted); margin:0; line-height:1.45; }
+  .noti time{ font-size:10.5px; color:var(--muted); display:block; margin-top:4px; }
+  .sh-foot{ padding:14px 22px; border-top:1px solid var(--line); }
+
+  /* ---- recompensas / cashback ---- */
+  .reward-hero{ background:linear-gradient(140deg, var(--void) 0%, #2A2438 60%, var(--copper) 220%); color:#fff; border-radius:var(--r-lg); padding:26px 28px; box-shadow:var(--shadow-lg); position:relative; overflow:hidden; margin-bottom:22px; }
+  .reward-hero::after{ content:''; position:absolute; right:-40px; top:-40px; width:180px; height:180px; border-radius:50%; background:radial-gradient(circle, rgba(227,169,106,0.5), transparent 70%); }
+  .reward-hero .pts{ font-family:'JetBrains Mono',monospace; font-size:34px; font-weight:600; letter-spacing:-0.01em; }
+  .reward-hero .pts small{ font-size:15px; opacity:.6; font-weight:400; }
+  .reward-hero .sub{ font-size:12.5px; color:rgba(255,255,255,0.7); margin-top:4px; }
+  .reward-hero .cb{ display:inline-flex; align-items:center; gap:7px; margin-top:16px; background:rgba(255,255,255,0.12); border-radius:12px; padding:9px 14px; font-size:12.5px; }
+  .reward-hero .cb b{ font-family:'JetBrains Mono',monospace; }
+  .reward-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; }
+  .reward-card{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px 20px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; }
+  .reward-card .emoji{ font-size:26px; margin-bottom:10px; }
+  .reward-card b{ font-size:14px; }
+  .reward-card p{ font-size:12px; color:var(--muted); margin:5px 0 14px; flex:1; }
+  .reward-card .cost{ font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:600; color:var(--copper); margin-bottom:12px; }
+  .reward-card button{ all:unset; cursor:pointer; text-align:center; background:var(--ink); color:var(--paper); border-radius:10px; padding:9px; font-size:12.5px; font-weight:600; }
+  body.dark .reward-card button{ background:var(--copper); color:var(--void); }
+  .reward-card button:disabled{ opacity:.4; cursor:not-allowed; }
+
+  /* ---- cartão virtual ---- */
+  .vcard{ max-width:380px; aspect-ratio:1.586/1; border-radius:18px; padding:20px 22px; color:#fff; position:relative; overflow:hidden; box-shadow:var(--shadow-lg); margin-bottom:14px;
+    background:linear-gradient(150deg, #3E9C82 0%, #2E6E7E 55%, #1C2A3A 100%); }
+  .vcard.locked{ filter:grayscale(0.5) brightness(.8); }
+  .vcard .vc-top{ display:flex; justify-content:space-between; align-items:center; font-size:12px; letter-spacing:.05em; text-transform:uppercase; opacity:.85; }
+  .vcard .vc-num{ font-family:'JetBrains Mono',monospace; font-size:17px; letter-spacing:.14em; margin-top:34px; }
+  .vcard .vc-bottom{ display:flex; gap:22px; margin-top:16px; font-family:'JetBrains Mono',monospace; font-size:12px; }
+  .vcard .vc-bottom span{ display:block; font-size:9px; letter-spacing:.08em; opacity:.6; margin-bottom:2px; font-family:'Inter',sans-serif; }
+
+  /* ---- lock screen ---- */
+  .lock{ position:fixed; inset:0; z-index:200; background:linear-gradient(160deg, #14111C 0%, #1C1826 60%, #100E17 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#fff; transition:opacity .4s ease, visibility .4s; }
+  .lock.hide{ opacity:0; visibility:hidden; }
+  .lock .lmark{ width:54px; height:54px; border-radius:15px; background:linear-gradient(140deg, var(--copper-soft), var(--copper)); display:flex; align-items:center; justify-content:center; font-family:'Bricolage Grotesque',sans-serif; font-weight:800; color:var(--void); font-size:24px; margin-bottom:18px; box-shadow:0 12px 40px rgba(198,135,63,0.4); }
+  .lock h2{ font-size:20px; margin-bottom:4px; }
+  .lock .lsub{ font-size:13px; color:rgba(241,239,246,0.55); margin-bottom:26px; }
+  .lock .dots{ display:flex; gap:14px; margin-bottom:30px; }
+  .lock .dots i{ width:14px; height:14px; border-radius:50%; border:2px solid rgba(241,239,246,0.4); transition:background .15s, border-color .15s, transform .15s; }
+  .lock .dots i.on{ background:var(--copper-soft); border-color:var(--copper-soft); transform:scale(1.1); }
+  .lock .dots.err i{ border-color:var(--coral); animation:shake .4s; }
+  @keyframes shake{ 0%,100%{transform:translateX(0);} 25%{transform:translateX(-7px);} 75%{transform:translateX(7px);} }
+  .keypad{ display:grid; grid-template-columns:repeat(3,68px); gap:16px; }
+  .keypad button{ all:unset; cursor:pointer; height:68px; border-radius:50%; background:rgba(241,239,246,0.08); display:flex; align-items:center; justify-content:center; font-size:22px; font-family:'JetBrains Mono',monospace; transition:background .12s, transform .1s; }
+  .keypad button:hover{ background:rgba(241,239,246,0.16); }
+  .keypad button:active{ transform:scale(0.92); }
+  .keypad button.fn{ font-size:13px; background:transparent; color:rgba(241,239,246,0.55); }
+  .lock .lskip{ margin-top:24px; background:none; border:none; color:rgba(241,239,246,0.5); font-size:12.5px; cursor:pointer; text-decoration:underline; }
+
+  /* ---- command palette ---- */
+  .cmdk-backdrop{ position:fixed; inset:0; background:rgba(20,17,28,0.5); backdrop-filter:blur(4px); z-index:150; display:none; align-items:flex-start; justify-content:center; padding-top:12vh; }
+  .cmdk-backdrop.open{ display:flex; animation:fade .18s; }
+  .cmdk{ width:min(560px,92vw); background:var(--card-bg); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow-lg); overflow:hidden; }
+  .cmdk .cmdk-search{ display:flex; align-items:center; gap:11px; padding:16px 18px; border-bottom:1px solid var(--line); }
+  .cmdk .cmdk-search svg{ width:18px; height:18px; color:var(--muted); }
+  .cmdk .cmdk-search input{ all:unset; flex:1; font-size:15px; color:var(--ink); }
+  .cmdk .cmdk-search kbd{ font-size:10.5px; font-family:'JetBrains Mono',monospace; color:var(--muted); border:1px solid var(--line); border-radius:6px; padding:2px 6px; }
+  .cmdk-list{ max-height:340px; overflow-y:auto; padding:8px; }
+  .cmdk-item{ display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:10px; cursor:pointer; font-size:13.5px; }
+  .cmdk-item .cic{ width:30px; height:30px; border-radius:8px; background:var(--paper-dim); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--copper); }
+  .cmdk-item .cic svg{ width:15px; height:15px; }
+  .cmdk-item .csub{ font-size:11px; color:var(--muted); }
+  .cmdk-item.sel, .cmdk-item:hover{ background:color-mix(in srgb, var(--copper) 12%, transparent); }
+  .cmdk-empty{ padding:24px; text-align:center; color:var(--muted); font-size:13px; }
+
+  /* ---- orçamento ---- */
+  .budget-list{ display:flex; flex-direction:column; gap:14px; margin-bottom:22px; }
+  .budget-row{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-md); padding:16px 18px; box-shadow:var(--shadow-sm); }
+  .budget-row .bh{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .budget-row .bh .bl{ display:flex; align-items:center; gap:9px; font-size:13.5px; font-weight:600; }
+  .budget-row .bh .bl .dot{ width:11px; height:11px; border-radius:4px; }
+  .budget-row .bh .bv{ font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--muted); }
+  .budget-row .bh .bv b{ color:var(--ink); }
+  .budget-row.over .bh .bv b{ color:var(--coral); }
+  .budget-edit{ all:unset; cursor:pointer; font-size:11px; color:var(--copper); font-weight:600; margin-left:8px; }
+  .budget-sum{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); padding:20px 22px; box-shadow:var(--shadow-sm); margin-bottom:22px; display:flex; gap:30px; flex-wrap:wrap; }
+  .budget-sum div span{ display:block; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; margin-bottom:4px; }
+  .budget-sum div b{ font-family:'JetBrains Mono',monospace; font-size:19px; }
+
+  /* ---- seguros ---- */
+  .ins-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .ins-card{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); padding:20px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; }
+  .ins-card.active{ border-color:var(--sea); }
+  .ins-card .emoji{ font-size:28px; margin-bottom:10px; }
+  .ins-card b{ font-size:14.5px; }
+  .ins-card p{ font-size:12px; color:var(--muted); margin:6px 0 12px; flex:1; line-height:1.45; }
+  .ins-card .price{ font-family:'JetBrains Mono',monospace; font-size:13px; margin-bottom:12px; }
+  .ins-card .price b{ font-size:17px; } .ins-card .price span{ color:var(--muted); font-size:11.5px; }
+  .ins-card button{ all:unset; cursor:pointer; text-align:center; border-radius:10px; padding:9px; font-size:12.5px; font-weight:600; background:var(--ink); color:var(--paper); }
+  body.dark .ins-card button{ background:var(--copper); color:var(--void); }
+  .ins-card.active button{ background:transparent; color:var(--sea); border:1px solid var(--sea); }
+
+  /* ---- dividir conta ---- */
+  .split-people{ display:flex; align-items:center; gap:12px; margin:6px 0 4px; }
+  .stepper{ display:flex; align-items:center; gap:0; border:1px solid var(--line); border-radius:11px; overflow:hidden; }
+  .stepper button{ all:unset; cursor:pointer; width:40px; height:42px; display:flex; align-items:center; justify-content:center; font-size:20px; background:var(--paper); }
+  .stepper button:hover{ background:var(--paper-dim); }
+  .stepper .val{ width:52px; text-align:center; font-family:'JetBrains Mono',monospace; font-size:16px; font-weight:600; }
+  .split-result{ margin-top:18px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-md); padding:18px 20px; box-shadow:var(--shadow-sm); text-align:center; }
+  .split-result .per{ font-family:'JetBrains Mono',monospace; font-size:30px; font-weight:600; color:var(--sea); }
+  .split-result .per small{ font-size:14px; color:var(--muted); font-weight:400; }
+  .split-result .det{ font-size:12.5px; color:var(--muted); margin-top:6px; }
+
   @media (max-width:820px){
     .analytics-grid{ grid-template-columns:1fr; }
   }
@@ -369,6 +505,39 @@
 
 <div class="toasts" id="toasts"></div>
 
+<!-- lock screen -->
+<div class="lock" id="lock">
+  <div class="lmark">C</div>
+  <h2>Crivo</h2>
+  <div class="lsub" id="lock-sub">Digite seu PIN de acesso</div>
+  <div class="dots" id="lock-dots"><i></i><i></i><i></i><i></i></div>
+  <div class="keypad" id="keypad"></div>
+  <button class="lskip" onclick="unlock(true)">Entrar sem PIN (demo)</button>
+</div>
+
+<!-- notifications sheet -->
+<div class="sheet-backdrop" id="sheet-backdrop" onclick="closeNoti()"></div>
+<aside class="sheet" id="noti-sheet">
+  <div class="sh-head">
+    <h3>Notificações</h3>
+    <button class="sh-close" onclick="closeNoti()" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="noti-list" id="noti-list"></div>
+  <div class="sh-foot"><button class="btn-ghost" style="width:100%; justify-content:center;" onclick="markAllRead()">Marcar todas como lidas</button></div>
+</aside>
+
+<!-- command palette -->
+<div class="cmdk-backdrop" id="cmdk-backdrop" onclick="if(event.target.id==='cmdk-backdrop')closeCmdk()">
+  <div class="cmdk">
+    <div class="cmdk-search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+      <input type="text" id="cmdk-input" placeholder="Buscar telas e ações…" oninput="renderCmdk()">
+      <kbd>ESC</kbd>
+    </div>
+    <div class="cmdk-list" id="cmdk-list"></div>
+  </div>
+</div>
+
 <div class="app">
   <aside class="rail">
     <div class="brand">
@@ -385,6 +554,10 @@
       <button data-view="pagar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h20v10a2 2 0 01-2 2H4a2 2 0 01-2-2z"/><path d="M6 11h6"/></svg> Pagar</button>
       <button data-view="cartao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Cartão</button>
       <button data-view="metas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg> Metas</button>
+      <button data-view="recompensas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.3L12 16.5 6.4 19.5l1.1-6.3L3 8.9 9 8z"/></svg> Recompensas</button>
+      <button data-view="orcamento"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7"/><rect x="12" y="6" width="3" height="11"/><rect x="17" y="13" width="3" height="4"/></svg> Orçamento</button>
+      <button data-view="dividir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 15c2.5.3 4.5 2 4.5 4.5"/></svg> Dividir</button>
+      <button data-view="seguros"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg> Seguros</button>
       <button data-view="investimentos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg> Investir</button>
       <button data-view="openfinance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg> Open Finance</button>
       <button data-view="cambio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> Câmbio</button>
@@ -398,6 +571,26 @@
   </aside>
 
   <main>
+
+    <div class="topbar">
+      <div class="tb-left">
+        <div class="hi" id="tb-hi">Bem-vinda de volta</div>
+        <div class="who">Quéren Fortunato</div>
+      </div>
+      <div class="tb-right">
+        <button class="icon-btn" onclick="openCmdk()" aria-label="Buscar (Ctrl+K)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
+        </button>
+        <button class="icon-btn" onclick="openNoti()" aria-label="Notificações">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 01-3.4 0"/></svg>
+          <span class="dot" id="noti-dot"></span>
+        </button>
+        <button class="icon-btn" onclick="goTo('assistente')" aria-label="Assistente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H8l-4 4V5a2 2 0 012-2h13a2 2 0 012 2z"/></svg>
+        </button>
+        <div class="tb-av" onclick="goTo('perfil')">QF</div>
+      </div>
+    </div>
 
     <section class="view active" id="inicio">
       <span class="eyebrow">Conta corrente</span>
@@ -656,6 +849,20 @@
         <button class="btn-primary" onclick="payInvoice()">Pagar fatura</button>
         <button class="btn-ghost" onclick="toggleCardLock()" id="lock-btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Bloquear cartão</button>
       </div>
+
+      <div class="section-title">Cartão virtual <a onclick="newVirtualCard()">Gerar novo</a></div>
+      <div class="vcard" id="vcard">
+        <div class="vc-top"><span>Crivo Virtual</span>
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" style="opacity:.8"><path d="M8 12a4 4 0 018 0M5 9a8 8 0 0114 0M2 6a12 12 0 0120 0"/></svg>
+        </div>
+        <div class="vc-num" id="vc-num">•••• •••• •••• ••••</div>
+        <div class="vc-bottom">
+          <div><span>VALIDADE</span><b id="vc-exp">--/--</b></div>
+          <div><span>CVV</span><b id="vc-cvv">•••</b></div>
+        </div>
+      </div>
+      <p style="font-size:12px; color:var(--muted); margin:0 0 28px;">Cartão descartável para compras online com mais segurança. Gere um novo a qualquer momento.</p>
+
       <div class="section-title">Compras da fatura</div>
       <div class="tx-list" id="card-tx"></div>
     </section>
@@ -665,6 +872,72 @@
       <h2 style="margin-bottom:6px;">Metas</h2>
       <p style="font-size:13px; color:var(--muted); margin:0 0 22px;">Guarde dinheiro separado para o que importa. <span id="goals-total" class="mono"></span></p>
       <div class="goal-grid" id="goal-grid"></div>
+    </section>
+
+    <section class="view" id="recompensas">
+      <span class="eyebrow">Crivo Rewards</span>
+      <h2 style="margin-bottom:20px;">Recompensas</h2>
+      <div class="reward-hero">
+        <div class="pts" id="rw-pts">0 <small>pontos</small></div>
+        <div class="sub">Você acumula 1 ponto a cada R$ 2,50 gastos no cartão.</div>
+        <div class="cb"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg> Cashback disponível: <b id="rw-cb">R$ 0,00</b></div>
+      </div>
+      <div class="section-title">Troque seus pontos</div>
+      <div class="reward-grid" id="reward-grid"></div>
+    </section>
+
+    <section class="view" id="orcamento">
+      <span class="eyebrow">Planejamento mensal</span>
+      <h2 style="margin-bottom:20px;">Orçamento</h2>
+      <div class="budget-sum">
+        <div><span>Orçamento total</span><b id="bg-total">R$ 0</b></div>
+        <div><span>Gasto até agora</span><b id="bg-spent">R$ 0</b></div>
+        <div><span>Disponível</span><b id="bg-left" style="color:var(--sea)">R$ 0</b></div>
+      </div>
+      <div class="section-title">Limites por categoria <a onclick="renderBudget()">Atualizar</a></div>
+      <div class="budget-list" id="budget-list"></div>
+    </section>
+
+    <section class="view" id="dividir">
+      <span class="eyebrow">Dividir a conta</span>
+      <h2 style="margin-bottom:20px;">Dividir</h2>
+      <div class="form-card">
+        <div class="field">
+          <label>Valor total da conta (R$)</label>
+          <input type="text" id="sp-total" inputmode="decimal" placeholder="0,00" oninput="calcSplit()">
+        </div>
+        <div class="field" style="margin-bottom:8px;">
+          <label>Gorjeta</label>
+          <div class="seg" id="sp-tip">
+            <button class="sel" data-tip="0">Sem gorjeta</button>
+            <button data-tip="10">10%</button>
+            <button data-tip="15">15%</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Quantas pessoas?</label>
+          <div class="split-people">
+            <div class="stepper">
+              <button onclick="stepPeople(-1)">−</button>
+              <div class="val" id="sp-count">2</div>
+              <button onclick="stepPeople(1)">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="split-result">
+          <div class="per" id="sp-per">R$ 0,00 <small>por pessoa</small></div>
+          <div class="det" id="sp-det"></div>
+        </div>
+        <button class="btn-primary" style="margin-top:16px;" onclick="chargeSplit()">Cobrar no Pix</button>
+        <div class="msg" id="sp-msg"></div>
+      </div>
+    </section>
+
+    <section class="view" id="seguros">
+      <span class="eyebrow">Proteção Crivo</span>
+      <h2 style="margin-bottom:6px;">Seguros</h2>
+      <p style="font-size:13px; color:var(--muted); margin:0 0 22px;">Contrate proteção em segundos, direto pela conta.</p>
+      <div class="ins-grid" id="ins-grid"></div>
     </section>
 
     <section class="view" id="investimentos">
@@ -929,6 +1202,9 @@
     state.balance += amount;
     save();
     renderBalance(); renderTx(); renderInsight(); renderAnalytics();
+    if(typeof pushNoti === 'function'){
+      pushNoti(amount>=0?'in':'card', amount>=0?'Entrada na conta':'Saída registrada', name + ' • ' + fmt(amount) + '. Saldo: ' + fmtPlain(state.balance) + '.');
+    }
   }
 
   /* ================= navegação ================= */
@@ -940,6 +1216,10 @@
     if(view==='assistente') initChat();
     if(view==='cambio') initCambio();
     if(view==='openfinance') renderOpenFinance();
+    if(view==='recompensas') renderRewards();
+    if(view==='orcamento') renderBudget();
+    if(view==='dividir') calcSplit();
+    if(view==='seguros') renderInsurance();
   }
   document.querySelectorAll('nav.tabs button[data-view]').forEach(btn=>{
     btn.addEventListener('click', ()=> goTo(btn.dataset.view));
@@ -1499,12 +1779,329 @@
     toast('Extrato pronto 📄','Use "Salvar como PDF" na impressão.','info');
   }
 
+  /* ================= Central de notificações ================= */
+  const DEFAULT_NOTI = [
+    { icon:'in', title:'Pix recebido', body:'Você recebeu R$ 1.500,00 de Depósito.', time:'há 2 h', read:false },
+    { icon:'card', title:'Fatura fecha em 8 dias', body:'Sua fatura do cartão está em R$ 1.847,30.', time:'há 5 h', read:false },
+    { icon:'star', title:'Você ganhou pontos!', body:'Suas compras renderam pontos no Crivo Rewards.', time:'ontem', read:false },
+    { icon:'shield', title:'Login seguro', body:'Acesso realizado neste dispositivo.', time:'ontem', read:true },
+  ];
+  if(!state.noti){ state.noti = JSON.parse(JSON.stringify(DEFAULT_NOTI)); save(); }
+  const NIC = {
+    in:{ c:'var(--sea)', bg:'rgba(62,156,130,0.14)', svg:'<path d="M12 19V5M5 12l7 7 7-7"/>' },
+    card:{ c:'var(--copper)', bg:'rgba(198,135,63,0.16)', svg:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>' },
+    star:{ c:'var(--gold)', bg:'rgba(216,169,59,0.16)', svg:'<path d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.3L12 16.5 6.4 19.5l1.1-6.3L3 8.9 9 8z"/>' },
+    shield:{ c:'var(--violet)', bg:'rgba(123,108,217,0.14)', svg:'<path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/>' },
+    alert:{ c:'var(--coral)', bg:'rgba(200,91,78,0.12)', svg:'<path d="M12 8v5M12 17h.01"/><circle cx="12" cy="12" r="9"/>' },
+  };
+  function renderNoti(){
+    const list = document.getElementById('noti-list');
+    list.innerHTML = state.noti.map(n=>{
+      const m = NIC[n.icon]||NIC.in;
+      return `<div class="noti ${n.read?'':'unread'}">
+        <div class="nic" style="background:${m.bg}; color:${m.c}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${m.svg}</svg></div>
+        <div><b>${n.title}</b><p>${n.body}</p><time>${n.time}</time></div></div>`;
+    }).join('') || '<div class="tx-empty">Sem notificações.</div>';
+    const unread = state.noti.some(n=>!n.read);
+    document.getElementById('noti-dot').style.display = unread ? 'block' : 'none';
+  }
+  function openNoti(){ document.getElementById('noti-sheet').classList.add('open'); document.getElementById('sheet-backdrop').classList.add('open'); }
+  function closeNoti(){ document.getElementById('noti-sheet').classList.remove('open'); document.getElementById('sheet-backdrop').classList.remove('open'); }
+  function markAllRead(){ state.noti.forEach(n=>n.read=true); save(); renderNoti(); toast('Tudo em dia ✅','Notificações marcadas como lidas.','info'); }
+  function pushNoti(icon, title, body){
+    state.noti.unshift({ icon, title, body, time:'agora', read:false });
+    if(state.noti.length>30) state.noti.pop();
+    save(); renderNoti();
+  }
+
+  /* ================= Recompensas / Cashback ================= */
+  const REWARDS = [
+    { emoji:'☕', name:'Café grátis', desc:'Vale um café em cafeterias parceiras.', cost:250 },
+    { emoji:'🎬', name:'Ingresso de cinema', desc:'1 ingresso em redes parceiras.', cost:900 },
+    { emoji:'📶', name:'Recarga R$ 20', desc:'Crédito de celular para qualquer operadora.', cost:700 },
+    { emoji:'✈️', name:'Milhas aéreas', desc:'Converta em 1.000 milhas.', cost:2000 },
+    { emoji:'💸', name:'Cashback R$ 25', desc:'Direto na sua conta Crivo.', cost:1500 },
+    { emoji:'🎧', name:'1 mês de streaming', desc:'Assinatura de música ou vídeo.', cost:1200 },
+  ];
+  function computePoints(){
+    const spent = state.transactions.filter(t=>t.amount<0).reduce((s,t)=>s+Math.abs(t.amount),0)
+                + cardTx.reduce((s,t)=>s+Math.abs(t.amount),0);
+    const earned = Math.floor(spent/2.5);
+    return earned - (state.pointsSpent||0);
+  }
+  function renderRewards(){
+    const pts = computePoints();
+    document.getElementById('rw-pts').innerHTML = pts.toLocaleString('pt-BR') + ' <small>pontos</small>';
+    document.getElementById('rw-cb').textContent = fmtPlain((state.cashback||0));
+    document.getElementById('reward-grid').innerHTML = REWARDS.map((r,i)=>`
+      <div class="reward-card">
+        <div class="emoji">${r.emoji}</div>
+        <b>${r.name}</b><p>${r.desc}</p>
+        <div class="cost">${r.cost.toLocaleString('pt-BR')} pts</div>
+        <button ${pts<r.cost?'disabled':''} onclick="redeem(${i})">${pts<r.cost?'Pontos insuficientes':'Resgatar'}</button>
+      </div>`).join('');
+  }
+  function redeem(i){
+    const r = REWARDS[i];
+    const pts = computePoints();
+    if(pts < r.cost){ toast('Pontos insuficientes','Continue usando o Crivo.','err'); return; }
+    state.pointsSpent = (state.pointsSpent||0) + r.cost;
+    if(/cashback/i.test(r.name)){ state.cashback = (state.cashback||0) + 25; addTx('Cashback Crivo Rewards', 25, 'Renda'); }
+    save(); renderRewards();
+    pushNoti('star','Resgate concluído', r.emoji+' '+r.name+' resgatado por '+r.cost+' pontos.');
+    toast('Resgatado! '+r.emoji, r.name+' • '+r.cost+' pts');
+  }
+
+  /* ================= Cartão virtual ================= */
+  function newVirtualCard(){
+    // gerador determinístico simples (sem Math.random)
+    const base = Date.now ? 0 : 0; // Date.now indisponível; usar tamanho do estado como semente
+    let seed = (state.transactions.length*7 + (state.pointsSpent||0) + (state.vcSeed||0) + 1) * 2654435761 % 100000000;
+    state.vcSeed = (state.vcSeed||0) + 1;
+    function digits(n){ let s=''; for(let k=0;k<n;k++){ seed=(seed*1103515245+12345)&0x7fffffff; s+=String(seed%10); } return s; }
+    const num = (digits(4)+' '+digits(4)+' '+digits(4)+' '+digits(4));
+    const exp = String((seed%12)+1).padStart(2,'0') + '/' + (30 + (seed%3));
+    const cvv = digits(3);
+    document.getElementById('vc-num').textContent = '5' + num.slice(1);
+    document.getElementById('vc-exp').textContent = exp;
+    document.getElementById('vc-cvv').textContent = cvv;
+    save();
+    toast('Cartão virtual gerado 💳','Válido para compras online.','info');
+  }
+
+  /* ================= Tela de bloqueio (PIN) ================= */
+  const PIN_KEY = 'crivo_pin';
+  let pinBuffer = '';
+  function buildKeypad(){
+    const keys = ['1','2','3','4','5','6','7','8','9','','0','del'];
+    document.getElementById('keypad').innerHTML = keys.map(k=>{
+      if(k==='') return '<span></span>';
+      if(k==='del') return '<button class="fn" onclick="pinDel()">apagar</button>';
+      return `<button onclick="pinPress('${k}')">${k}</button>`;
+    }).join('');
+  }
+  function renderPinDots(err){
+    const dots = document.getElementById('lock-dots');
+    dots.classList.toggle('err', !!err);
+    dots.querySelectorAll('i').forEach((d,i)=> d.classList.toggle('on', i<pinBuffer.length));
+  }
+  function pinPress(d){
+    if(pinBuffer.length>=4) return;
+    pinBuffer += d; renderPinDots(false);
+    if(pinBuffer.length===4) setTimeout(checkPin, 180);
+  }
+  function pinDel(){ pinBuffer = pinBuffer.slice(0,-1); renderPinDots(false); }
+  function checkPin(){
+    let stored;
+    try{ stored = localStorage.getItem(PIN_KEY); }catch(e){}
+    if(!stored){ // primeira vez: define o PIN digitado
+      try{ localStorage.setItem(PIN_KEY, pinBuffer); }catch(e){}
+      toast('PIN definido 🔐','Use este PIN nos próximos acessos.','info');
+      unlock();
+    } else if(stored === pinBuffer){
+      unlock();
+    } else {
+      renderPinDots(true);
+      setTimeout(()=>{ pinBuffer=''; renderPinDots(false); }, 500);
+    }
+  }
+  function unlock(skip){
+    document.getElementById('lock').classList.add('hide');
+    if(skip) try{ /* modo demo, não persiste */ }catch(e){}
+  }
+  function initLock(){
+    buildKeypad();
+    let stored;
+    try{ stored = localStorage.getItem(PIN_KEY); }catch(e){}
+    document.getElementById('lock-sub').textContent = stored ? 'Digite seu PIN de acesso' : 'Crie um PIN de 4 dígitos';
+  }
+
+  /* ================= Orçamento mensal ================= */
+  const DEFAULT_BUDGETS = { 'Mercado':800, 'Alimentação':500, 'Transporte':300, 'Lazer':250, 'Saúde':200, 'Contas':600 };
+  if(!state.budgets){ state.budgets = Object.assign({}, DEFAULT_BUDGETS); save(); }
+  function spentByCat(){
+    const s = {};
+    state.transactions.forEach(t=>{ if(t.amount<0){ const c=t.cat||guessCat(t.name); s[c]=(s[c]||0)+Math.abs(t.amount);} });
+    cardTx.forEach(t=>{ const c=guessCat(t.name); s[c]=(s[c]||0)+Math.abs(t.amount); });
+    return s;
+  }
+  function renderBudget(){
+    const spent = spentByCat();
+    const cats = Object.keys(state.budgets);
+    let totalBudget=0, totalSpent=0;
+    const list = document.getElementById('budget-list');
+    list.innerHTML = cats.map(cat=>{
+      const lim = state.budgets[cat];
+      const sp = spent[cat]||0;
+      totalBudget += lim; totalSpent += sp;
+      const pct = lim? Math.min(100, sp/lim*100) : 0;
+      const over = sp>lim;
+      const color = (CAT_META[cat]||CAT_META['Outros']).color;
+      const barColor = over ? 'var(--coral)' : color;
+      return `<div class="budget-row ${over?'over':''}">
+        <div class="bh">
+          <div class="bl"><span class="dot" style="background:${color}"></span>${cat}
+            <button class="budget-edit" onclick="editBudget('${cat}')">editar</button></div>
+          <div class="bv"><b>${fmtPlain(sp)}</b> / ${fmtPlain(lim)}${over?' ⚠️':''}</div>
+        </div>
+        <div class="progress"><i style="width:0; background:${barColor}" data-w="${pct}"></i></div>
+      </div>`;
+    }).join('') || '<div class="tx-empty">Nenhuma categoria configurada.</div>';
+    document.getElementById('bg-total').textContent = fmtPlain(totalBudget);
+    document.getElementById('bg-spent').textContent = fmtPlain(totalSpent);
+    const left = totalBudget - totalSpent;
+    const leftEl = document.getElementById('bg-left');
+    leftEl.textContent = fmtPlain(left);
+    leftEl.style.color = left>=0 ? 'var(--sea)' : 'var(--coral)';
+    setTimeout(()=>{ list.querySelectorAll('.progress > i').forEach(i=> i.style.width = i.dataset.w+'%'); }, 80);
+  }
+  function editBudget(cat){
+    openModal(`<h3>Limite de ${cat}</h3>
+      <p>Defina quanto pretende gastar com ${cat} por mês.</p>
+      <div class="field"><label>Limite (R$)</label><input type="text" id="bg-input" inputmode="decimal" value="${state.budgets[cat]}" autofocus></div>
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="saveBudget('${cat}')">Salvar</button>
+        <button class="btn-ghost" onclick="closeModal()">Cancelar</button>
+      </div>`);
+  }
+  function saveBudget(cat){
+    const v = parseAmount(document.getElementById('bg-input').value);
+    if(isNaN(v) || v<0){ toast('Valor inválido','Informe um limite válido.','err'); return; }
+    state.budgets[cat] = v; save(); renderBudget(); closeModal();
+    toast('Limite atualizado 📊', cat + ': ' + fmtPlain(v), 'info');
+  }
+
+  /* ================= Dividir conta ================= */
+  let splitPeople = 2, splitTip = 0;
+  function stepPeople(d){ splitPeople = Math.max(1, Math.min(50, splitPeople+d)); document.getElementById('sp-count').textContent = splitPeople; calcSplit(); }
+  document.querySelectorAll('#sp-tip button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('#sp-tip button').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel'); splitTip = parseFloat(b.dataset.tip); calcSplit();
+    });
+  });
+  function calcSplit(){
+    const total = parseAmount(document.getElementById('sp-total').value) || 0;
+    const withTip = total * (1 + splitTip/100);
+    const per = splitPeople>0 ? withTip/splitPeople : 0;
+    document.getElementById('sp-per').innerHTML = fmtPlain(per) + ' <small>por pessoa</small>';
+    document.getElementById('sp-det').textContent = splitTip>0
+      ? `${fmtPlain(withTip)} (com ${splitTip}% de gorjeta) ÷ ${splitPeople} pessoas`
+      : `${fmtPlain(withTip)} ÷ ${splitPeople} pessoas`;
+  }
+  function chargeSplit(){
+    const total = parseAmount(document.getElementById('sp-total').value) || 0;
+    const msg = document.getElementById('sp-msg');
+    if(total<=0){ msg.className='msg err'; msg.textContent='Informe o valor da conta.'; return; }
+    const withTip = total * (1 + splitTip/100);
+    const per = withTip/splitPeople;
+    msg.className='msg ok'; msg.textContent='Cobrança de ' + fmtPlain(per) + ' enviada para ' + (splitPeople-1) + ' pessoa(s) via Pix.';
+    pushNoti('in','Cobrança criada','Você cobrou '+fmtPlain(per)+' de '+(splitPeople-1)+' pessoa(s).');
+    toast('Cobrança enviada 🧾', fmtPlain(per) + ' × ' + (splitPeople-1) + ' pessoas');
+  }
+
+  /* ================= Seguros ================= */
+  const INSURANCES = [
+    { key:'celular', emoji:'📱', name:'Seguro Celular', desc:'Cobre roubo, furto e quebra acidental de tela.', price:19.90 },
+    { key:'vida', emoji:'🛡️', name:'Seguro de Vida', desc:'Proteção para você e sua família, até R$ 100 mil.', price:29.90 },
+    { key:'residencial', emoji:'🏠', name:'Residencial', desc:'Incêndio, roubo e danos elétricos em casa.', price:24.90 },
+    { key:'pet', emoji:'🐾', name:'Pet', desc:'Consultas, vacinas e emergências veterinárias.', price:39.90 },
+    { key:'viagem', emoji:'✈️', name:'Viagem', desc:'Assistência médica e bagagem no exterior.', price:14.90 },
+    { key:'cartao', emoji:'💳', name:'Proteção Cartão', desc:'Compra protegida e cobertura de compras online.', price:9.90 },
+  ];
+  if(!state.insurances) { state.insurances = []; save(); }
+  function renderInsurance(){
+    document.getElementById('ins-grid').innerHTML = INSURANCES.map(ins=>{
+      const active = state.insurances.includes(ins.key);
+      return `<div class="ins-card ${active?'active':''}">
+        <div class="emoji">${ins.emoji}</div>
+        <b>${ins.name}</b><p>${ins.desc}</p>
+        <div class="price"><b>${fmtPlain(ins.price)}</b><span>/mês</span></div>
+        <button onclick="toggleInsurance('${ins.key}')">${active?'✓ Contratado · cancelar':'Contratar'}</button>
+      </div>`;
+    }).join('');
+  }
+  function toggleInsurance(key){
+    const ins = INSURANCES.find(i=>i.key===key);
+    const idx = state.insurances.indexOf(key);
+    if(idx>=0){
+      state.insurances.splice(idx,1); save(); renderInsurance();
+      toast('Seguro cancelado', ins.name, 'info');
+    } else {
+      state.insurances.push(key); save(); renderInsurance();
+      pushNoti('shield','Seguro contratado', ins.name+' ativo por '+fmtPlain(ins.price)+'/mês.');
+      toast('Seguro contratado '+ins.emoji, ins.name+' • '+fmtPlain(ins.price)+'/mês');
+    }
+  }
+
+  /* ================= Command palette (⌘K) ================= */
+  const CMDS = [
+    { label:'Início', sub:'Ver saldo e resumo', view:'inicio', svg:'<path d="M3 11l9-7 9 7"/><path d="M5 10v9h14v-9"/>' },
+    { label:'Extrato', sub:'Movimentações', view:'extrato', svg:'<path d="M4 6h16M4 12h16M4 18h10"/>' },
+    { label:'Análise de gastos', sub:'Gráficos por categoria', view:'analise', svg:'<path d="M21 21H4V3"/><path d="M7 14l4-4 3 3 5-6"/>' },
+    { label:'Assistente', sub:'Falar com o Crivo AI', view:'assistente', svg:'<path d="M21 15a2 2 0 01-2 2H8l-4 4V5a2 2 0 012-2h13a2 2 0 012 2z"/>' },
+    { label:'Transferir', sub:'TED / DOC', view:'transferir', svg:'<path d="M17 3l4 4-4 4M21 7H3"/>' },
+    { label:'Pix', sub:'Enviar ou receber', view:'pix', svg:'<path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>' },
+    { label:'Pagar', sub:'Boleto e recarga', view:'pagar', svg:'<path d="M2 7h20v10H2z"/><path d="M6 11h6"/>' },
+    { label:'Cartão', sub:'Fatura e cartão virtual', view:'cartao', svg:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>' },
+    { label:'Metas', sub:'Cofrinhos', view:'metas', svg:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>' },
+    { label:'Recompensas', sub:'Pontos e cashback', view:'recompensas', svg:'<path d="M12 2l3 6 6 .9-4.5 4.3 1.1 6.3L12 16.5 6.4 19.5l1.1-6.3L3 8.9 9 8z"/>' },
+    { label:'Orçamento', sub:'Limites por categoria', view:'orcamento', svg:'<path d="M3 3v18h18"/><rect x="7" y="10" width="3" height="7"/>' },
+    { label:'Dividir conta', sub:'Rachar com amigos', view:'dividir', svg:'<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/>' },
+    { label:'Seguros', sub:'Proteção Crivo', view:'seguros', svg:'<path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/>' },
+    { label:'Investir', sub:'Carteira', view:'investimentos', svg:'<path d="M3 17l6-6 4 4 8-8"/>' },
+    { label:'Open Finance', sub:'Contas conectadas', view:'openfinance', svg:'<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3"/>' },
+    { label:'Câmbio', sub:'Moedas e conversão', view:'cambio', svg:'<path d="M4 8h13l-3-3M20 16H7l3 3"/>' },
+    { label:'Empréstimo', sub:'Simular crédito', view:'emprestimo', svg:'<circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/>' },
+    { label:'Perfil', sub:'Minha conta', view:'perfil', svg:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>' },
+    { label:'Alternar tema', sub:'Modo claro / escuro', action:()=>toggleTheme(), svg:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/>' },
+    { label:'Exportar extrato em PDF', sub:'Gerar documento', action:()=>exportPdf(), svg:'<path d="M12 3v12M8 11l4 4 4-4"/>' },
+    { label:'Gerar cartão virtual', sub:'Novo cartão descartável', action:()=>{ goTo('cartao'); newVirtualCard(); }, svg:'<rect x="2" y="5" width="20" height="14" rx="2"/>' },
+  ];
+  let cmdkSel = 0, cmdkFiltered = CMDS;
+  function openCmdk(){
+    document.getElementById('cmdk-backdrop').classList.add('open');
+    const inp = document.getElementById('cmdk-input'); inp.value=''; cmdkSel=0; renderCmdk();
+    setTimeout(()=>inp.focus(), 40);
+  }
+  function closeCmdk(){ document.getElementById('cmdk-backdrop').classList.remove('open'); }
+  function renderCmdk(){
+    const q = (document.getElementById('cmdk-input').value||'').toLowerCase();
+    cmdkFiltered = CMDS.filter(c=> (c.label+' '+(c.sub||'')).toLowerCase().includes(q));
+    if(cmdkSel >= cmdkFiltered.length) cmdkSel = 0;
+    const list = document.getElementById('cmdk-list');
+    list.innerHTML = cmdkFiltered.length ? cmdkFiltered.map((c,i)=>`
+      <div class="cmdk-item ${i===cmdkSel?'sel':''}" onclick="runCmd(${i})" onmousemove="cmdkSel=${i};highlightCmdk()">
+        <div class="cic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${c.svg}</svg></div>
+        <div><div>${c.label}</div><div class="csub">${c.sub||''}</div></div>
+      </div>`).join('') : '<div class="cmdk-empty">Nada encontrado.</div>';
+  }
+  function highlightCmdk(){ document.querySelectorAll('#cmdk-list .cmdk-item').forEach((el,i)=> el.classList.toggle('sel', i===cmdkSel)); }
+  function runCmd(i){
+    const c = cmdkFiltered[i]; if(!c) return;
+    closeCmdk();
+    if(c.view) goTo(c.view);
+    else if(c.action) c.action();
+  }
+  document.addEventListener('keydown', (e)=>{
+    if((e.ctrlKey||e.metaKey) && (e.key==='k'||e.key==='K')){ e.preventDefault(); openCmdk(); return; }
+    const open = document.getElementById('cmdk-backdrop').classList.contains('open');
+    if(!open) return;
+    if(e.key==='Escape'){ closeCmdk(); }
+    else if(e.key==='ArrowDown'){ e.preventDefault(); cmdkSel=Math.min(cmdkFiltered.length-1, cmdkSel+1); highlightCmdk(); }
+    else if(e.key==='ArrowUp'){ e.preventDefault(); cmdkSel=Math.max(0, cmdkSel-1); highlightCmdk(); }
+    else if(e.key==='Enter'){ e.preventDefault(); runCmd(cmdkSel); }
+  });
+
   /* ================= boot ================= */
   function renderAll(){
     renderBalance(); renderTx(); renderCard(); renderInvest();
     renderGoals(); renderInsight(); renderAnalytics(); drawQR();
-    renderOpenFinance();
+    renderOpenFinance(); renderRewards(); renderNoti();
+    renderBudget(); renderInsurance();
+    (function(){ const h=new Date().getHours(); document.getElementById('tb-hi').textContent = (h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'); })();
   }
+  initLock();
   renderAll();
 </script>
 
