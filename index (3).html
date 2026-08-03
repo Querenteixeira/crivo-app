@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crivo — conta corrente</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --ink:#0F1512;
+    --panel-2:#1F4D3D;
+    --bone:#F6F4EF;
+    --bone-dim:#E7E3D8;
+    --lime:#9BC94A;
+    --lime-deep:#5F7F2E;
+    --rust:#B24A3A;
+    --text-dark:#171B18;
+    --text-muted:#5F6A63;
+    --line:rgba(15,21,18,0.12);
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bone); color:var(--text-dark); font-family:'Source Sans 3', sans-serif; }
+  h1,h2,h3{ font-family:'Space Grotesk', sans-serif; font-weight:600; margin:0; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color:inherit; text-decoration:none; }
+
+  .app{ display:flex; min-height:100vh; }
+
+  .sidebar{ width:224px; flex-shrink:0; background:var(--ink); color:var(--bone); padding:26px 0; display:flex; flex-direction:column; position:sticky; top:0; height:100vh; }
+  .sidebar .brand{ padding:0 22px 22px; border-bottom:1px solid rgba(246,244,239,0.1); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+  .sidebar .brand .mark{ width:30px; height:30px; background:var(--lime); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk', sans-serif; font-weight:600; color:var(--ink); font-size:15px; }
+  .sidebar .brand h1{ font-size:18px; color:var(--bone); letter-spacing:-0.01em; }
+
+  nav.tabs{ display:flex; flex-direction:column; gap:2px; padding:0 12px; flex:1; }
+  nav.tabs button{ all:unset; display:flex; align-items:center; gap:10px; padding:11px 12px; border-radius:8px; font-size:14px; color:rgba(246,244,239,0.65); cursor:pointer; }
+  nav.tabs button:hover{ background:rgba(246,244,239,0.06); color:var(--bone); }
+  nav.tabs button.active{ background:var(--panel-2); color:var(--bone); }
+
+  .sidebar .foot{ padding:14px 22px 2px; font-size:11.5px; color:rgba(246,244,239,0.4); border-top:1px solid rgba(246,244,239,0.1); }
+
+  main{ flex:1; padding:44px 48px; max-width:760px; }
+  .view{ display:none; animation:fade .2s ease; }
+  .view.active{ display:block; }
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px; display:block; }
+  .view h2{ font-size:24px; margin-bottom:22px; }
+
+  .balance-card{ background:var(--ink); color:var(--bone); border-radius:16px; padding:26px 28px; margin-bottom:26px; background-image: repeating-linear-gradient(90deg, rgba(246,244,239,0.035) 0 1px, transparent 1px 26px); }
+  .balance-card .lbl{ font-size:12.5px; color:rgba(246,244,239,0.55); margin-bottom:8px; }
+  .balance-card .amt{ font-family:'IBM Plex Mono', monospace; font-size:34px; font-weight:600; letter-spacing:-0.01em; }
+  .balance-card .amt span{ font-size:18px; opacity:0.6; }
+  .balance-card .sub{ margin-top:10px; font-size:12.5px; color:rgba(246,244,239,0.5); }
+
+  .quick-actions{ display:flex; gap:10px; margin-bottom:30px; }
+  .quick-actions button{ all:unset; cursor:pointer; background:#fff; border:1px solid var(--line); border-radius:10px; padding:12px 18px; font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:8px; font-family:'Space Grotesk', sans-serif; }
+  .quick-actions button:hover{ border-color:var(--panel-2); }
+  .quick-actions button .ic{ width:20px; height:20px; border-radius:50%; background:var(--bone-dim); display:flex; align-items:center; justify-content:center; font-size:12px; }
+
+  .section-title{ font-size:13px; font-weight:600; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; }
+
+  .tx-list{ display:flex; flex-direction:column; }
+  .tx-row{ display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); }
+  .tx-row:first-child{ border-top:1px solid var(--line); }
+  .tx-left b{ display:block; font-size:14.5px; font-weight:600; margin-bottom:2px; }
+  .tx-left span{ font-size:12.5px; color:var(--text-muted); }
+  .tx-amt{ font-family:'IBM Plex Mono', monospace; font-size:14.5px; font-weight:600; }
+  .tx-amt.pos{ color:var(--lime-deep); }
+  .tx-amt.neg{ color:var(--rust); }
+
+  .form-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px 28px; max-width:420px; }
+  .field{ margin-bottom:16px; }
+  .field label{ display:block; font-size:12.5px; color:var(--text-muted); margin-bottom:6px; }
+  .field input{ width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:8px; font-size:14.5px; font-family:'IBM Plex Mono', monospace; background:var(--bone); }
+  .field input:focus{ outline:none; border-color:var(--panel-2); }
+  .btn-primary{ all:unset; cursor:pointer; display:inline-block; background:var(--ink); color:var(--bone); padding:12px 22px; border-radius:8px; font-size:14px; font-weight:600; font-family:'Space Grotesk', sans-serif; }
+  .btn-primary:hover{ background:var(--panel-2); }
+  .msg{ margin-top:14px; font-size:13.5px; padding:10px 12px; border-radius:8px; display:none; }
+  .msg.ok{ background:rgba(155,201,74,0.16); color:var(--lime-deep); display:block; }
+  .msg.err{ background:rgba(178,74,58,0.12); color:var(--rust); display:block; }
+
+  .profile-card{ background:#fff; border:1px solid var(--line); border-radius:14px; padding:0; max-width:460px; overflow:hidden; }
+  .profile-card .head{ background:var(--ink); color:var(--bone); padding:22px 24px; display:flex; align-items:center; gap:14px; }
+  .profile-card .head .av{ width:44px; height:44px; border-radius:50%; background:var(--lime); color:var(--ink); display:flex; align-items:center; justify-content:center; font-weight:600; font-family:'Space Grotesk', sans-serif; }
+  .profile-card .head b{ display:block; font-size:15px; }
+  .profile-card .head span{ font-size:12.5px; color:rgba(246,244,239,0.6); }
+  .profile-card table{ width:100%; font-size:14px; }
+  .profile-card table td{ padding:13px 24px; border-bottom:1px solid var(--line); }
+  .profile-card table td:first-child{ color:var(--text-muted); }
+  .profile-card table td:last-child{ text-align:right; font-family:'IBM Plex Mono', monospace; }
+  .profile-card table tr:last-child td{ border-bottom:none; }
+
+  @media (max-width:760px){
+    .app{ flex-direction:column; }
+    .sidebar{ width:100%; height:auto; position:fixed; bottom:0; flex-direction:row; padding:0; z-index:10; border-top:1px solid rgba(246,244,239,0.1); }
+    .sidebar .brand, .sidebar .foot{ display:none; }
+    nav.tabs{ flex-direction:row; flex:1; padding:6px; justify-content:space-around; }
+    nav.tabs button{ flex-direction:column; gap:4px; font-size:10.5px; padding:8px 4px; }
+    main{ padding:28px 20px 96px; }
+    .balance-card .amt{ font-size:28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="mark">C</div>
+      <h1>Crivo</h1>
+    </div>
+    <nav class="tabs">
+      <button class="active" data-view="inicio">Início</button>
+      <button data-view="extrato">Extrato</button>
+      <button data-view="transferir">Transferir</button>
+      <button data-view="cartao">Cartão</button>
+      <button data-view="investimentos">Investir</button>
+      <button data-view="perfil">Perfil</button>
+    </nav>
+    <div class="foot">Conta corrente · protótipo</div>
+  </aside>
+
+  <main>
+
+    <section class="view active" id="inicio">
+      <span class="eyebrow">Conta corrente</span>
+      <div class="balance-card">
+        <div class="lbl">Saldo disponível</div>
+        <div class="amt" id="balance-display">R$ <span>0,00</span></div>
+        <div class="sub">Agência 0001 · Conta 00219-4</div>
+      </div>
+
+      <div class="quick-actions">
+        <button onclick="goTo('transferir')"><span class="ic">↑</span> Transferir</button>
+        <button onclick="goTo('extrato')"><span class="ic">≡</span> Extrato</button>
+        <button onclick="goTo('perfil')"><span class="ic">◎</span> Perfil</button>
+      </div>
+
+      <div class="section-title">Últimas movimentações</div>
+      <div class="tx-list" id="tx-recent"></div>
+    </section>
+
+    <section class="view" id="extrato">
+      <span class="eyebrow">Movimentações</span>
+      <h2>Extrato completo</h2>
+      <div class="tx-list" id="tx-full"></div>
+    </section>
+
+    <section class="view" id="transferir">
+      <span class="eyebrow">Transferência</span>
+      <h2>Transferir</h2>
+      <div class="form-card">
+        <div class="field">
+          <label>Nome do favorecido</label>
+          <input type="text" id="tf-name" placeholder="Nome completo">
+        </div>
+        <div class="field">
+          <label>Valor (R$)</label>
+          <input type="text" id="tf-amount" placeholder="0,00">
+        </div>
+        <button class="btn-primary" onclick="doTransfer()">Confirmar transferência</button>
+        <div class="msg" id="tf-msg"></div>
+      </div>
+    </section>
+
+    <section class="view" id="cartao">
+      <span class="eyebrow">Cartão de crédito</span>
+      <h2>Cartão</h2>
+      <div class="balance-card" style="background:var(--panel-2);">
+        <div class="lbl">Fatura atual (fecha em 8 dias)</div>
+        <div class="amt" id="invoice-display">R$ <span>0,00</span></div>
+        <div class="sub">Limite disponível: <span id="limit-display" class="mono">R$ 0,00</span> de R$ 6.000,00</div>
+      </div>
+
+      <div class="section-title">Compras da fatura</div>
+      <div class="tx-list" id="card-tx"></div>
+    </section>
+
+    <section class="view" id="investimentos">
+      <span class="eyebrow">Investimentos</span>
+      <h2>Carteira</h2>
+      <div class="balance-card" style="background:var(--ink);">
+        <div class="lbl">Total investido</div>
+        <div class="amt" id="invest-display">R$ <span>0,00</span></div>
+        <div class="sub" id="invest-return">Rentabilidade no período: <span class="mono" style="color:var(--lime);">+0,00%</span></div>
+      </div>
+
+      <div class="section-title">Onde está o dinheiro</div>
+      <div class="tx-list" id="invest-list"></div>
+    </section>
+
+    <section class="view" id="perfil">
+      <span class="eyebrow">Minha conta</span>
+      <h2>Perfil</h2>
+      <div class="profile-card">
+        <div class="head">
+          <div class="av">QF</div>
+          <div>
+            <b>Quéren Fortunato</b>
+            <span>Cliente desde 2026</span>
+          </div>
+        </div>
+        <table>
+          <tr><td>Agência</td><td>0001</td></tr>
+          <tr><td>Conta</td><td>00219-4</td></tr>
+          <tr><td>Tipo</td><td>Conta corrente</td></tr>
+          <tr><td>CPF</td><td>***.***.***-**</td></tr>
+        </table>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  let balance = 4280.55;
+  let transactions = [
+    { name: 'Depósito recebido', date: '01/08/2026', amount: 1500.00 },
+    { name: 'Supermercado Vila Nova', date: '30/07/2026', amount: -186.40 },
+    { name: 'Transferência enviada — J. Alves', date: '28/07/2026', amount: -320.00 },
+    { name: 'Salário', date: '25/07/2026', amount: 3200.00 },
+    { name: 'Farmácia Central', date: '22/07/2026', amount: -54.90 },
+    { name: 'Assinatura streaming', date: '20/07/2026', amount: -39.90 },
+  ];
+
+  function fmt(n){
+    const abs = Math.abs(n).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    return (n < 0 ? '-R$ ' : 'R$ ') + abs;
+  }
+
+  function renderBalance(){
+    const parts = balance.toFixed(2).split('.');
+    const intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    document.getElementById('balance-display').innerHTML = 'R$ ' + intPart + '<span>,' + parts[1] + '</span>';
+  }
+
+  function renderTx(){
+    document.getElementById('tx-full').innerHTML = transactions.map(t => txRow(t)).join('');
+    document.getElementById('tx-recent').innerHTML = transactions.slice(0,4).map(t => txRow(t)).join('');
+  }
+
+  function txRow(t){
+    const cls = t.amount >= 0 ? 'pos' : 'neg';
+    const sign = t.amount >= 0 ? '+' : '';
+    return `<div class="tx-row">
+      <div class="tx-left"><b>${t.name}</b><span>${t.date}</span></div>
+      <div class="tx-amt ${cls}">${sign}${fmt(t.amount)}</div>
+    </div>`;
+  }
+
+  function goTo(view){
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.toggle('active', b.dataset.view===view));
+    document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active', v.id===view));
+    window.scrollTo(0,0);
+  }
+
+  document.querySelectorAll('nav.tabs button').forEach(btn=>{
+    btn.addEventListener('click', ()=> goTo(btn.dataset.view));
+  });
+
+  function doTransfer(){
+    const name = document.getElementById('tf-name').value.trim();
+    const raw = document.getElementById('tf-amount').value.replace(',', '.').trim();
+    const amount = parseFloat(raw);
+    const msg = document.getElementById('tf-msg');
+
+    if(!name || !raw || isNaN(amount) || amount <= 0){
+      msg.className = 'msg err';
+      msg.textContent = 'Preencha o nome e um valor válido.';
+      return;
+    }
+    if(amount > balance){
+      msg.className = 'msg err';
+      msg.textContent = 'Saldo insuficiente para essa transferência.';
+      return;
+    }
+
+    balance -= amount;
+    transactions.unshift({ name: 'Transferência enviada — ' + name, date: 'agora', amount: -amount });
+    renderBalance();
+    renderTx();
+
+    msg.className = 'msg ok';
+    msg.textContent = 'Transferência de ' + fmt(amount) + ' para ' + name + ' realizada.';
+    document.getElementById('tf-name').value = '';
+    document.getElementById('tf-amount').value = '';
+  }
+
+  // Cartão de crédito
+  const invoiceTotal = 1847.30;
+  const cardLimit = 6000.00;
+  const cardTx = [
+    { name: 'Posto Ipiranga', date: '01/08/2026', amount: -180.00 },
+    { name: 'Restaurante Sabor & Arte', date: '30/07/2026', amount: -96.50 },
+    { name: 'Loja de roupas Bela Vista', date: '27/07/2026', amount: -259.90 },
+    { name: 'Farmácia Central', date: '24/07/2026', amount: -47.80 },
+    { name: 'Assinatura streaming', date: '20/07/2026', amount: -39.90 },
+    { name: 'Mercado São João', date: '15/07/2026', amount: -223.10 },
+  ];
+
+  function renderCard(){
+    const parts = invoiceTotal.toFixed(2).split('.');
+    const intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    document.getElementById('invoice-display').innerHTML = 'R$ ' + intPart + '<span>,' + parts[1] + '</span>';
+    document.getElementById('limit-display').textContent = fmt(cardLimit - invoiceTotal);
+    document.getElementById('card-tx').innerHTML = cardTx.map(t => txRow(t)).join('');
+  }
+
+  // Investimentos
+  const investments = [
+    { name: 'Tesouro Selic 2029', date: 'Renda fixa', amount: 3200.00 },
+    { name: 'CDB banco Crivo', date: 'Renda fixa', amount: 1850.40 },
+    { name: 'Fundo multimercado', date: 'Renda variável', amount: 640.15 },
+  ];
+  const investReturnPct = 1.84;
+
+  function renderInvest(){
+    const total = investments.reduce((s,i)=>s+i.amount, 0);
+    const parts = total.toFixed(2).split('.');
+    const intPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    document.getElementById('invest-display').innerHTML = 'R$ ' + intPart + '<span>,' + parts[1] + '</span>';
+    document.getElementById('invest-return').innerHTML = 'Rentabilidade no período: <span class="mono" style="color:var(--lime-deep);">+' + investReturnPct.toFixed(2).replace('.',',') + '%</span>';
+    document.getElementById('invest-list').innerHTML = investments.map(i => txRow({name:i.name, date:i.date, amount:i.amount})).join('');
+  }
+
+  renderBalance();
+  renderTx();
+  renderCard();
+  renderInvest();
+</script>
+
+</body>
+</html>
