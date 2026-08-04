@@ -482,8 +482,128 @@
   .split-result .per small{ font-size:14px; color:var(--muted); font-weight:400; }
   .split-result .det{ font-size:12.5px; color:var(--muted); margin-top:6px; }
 
+  /* ---- projeção (juros compostos) ---- */
+  .proj-chart{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow-sm); padding:20px 22px; margin-bottom:20px; }
+  .proj-chart svg{ width:100%; height:160px; overflow:visible; }
+  .proj-legend{ display:flex; gap:18px; margin-top:12px; font-size:12px; }
+  .proj-legend .li{ display:flex; align-items:center; gap:7px; color:var(--muted); }
+  .proj-legend .li .dot{ width:10px; height:10px; border-radius:3px; }
+  .proj-stats{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:22px; }
+  .proj-stat{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-md); padding:16px 18px; box-shadow:var(--shadow-sm); }
+  .proj-stat span{ font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; display:block; margin-bottom:5px; }
+  .proj-stat b{ font-family:'JetBrains Mono',monospace; font-size:18px; }
+  .proj-stat.hl b{ color:var(--sea); }
+  .range-row{ margin-bottom:16px; }
+  .range-row .rl{ display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:8px; }
+  .range-row .rl b{ font-family:'JetBrains Mono',monospace; }
+  input[type=range]{ -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:6px; background:var(--paper-dim); outline:none; }
+  input[type=range]::-webkit-slider-thumb{ -webkit-appearance:none; appearance:none; width:20px; height:20px; border-radius:50%; background:var(--copper); cursor:pointer; box-shadow:var(--shadow-sm); border:3px solid var(--card-bg); }
+  input[type=range]::-moz-range-thumb{ width:20px; height:20px; border-radius:50%; background:var(--copper); cursor:pointer; border:3px solid var(--card-bg); }
+
+  /* ---- conta global (multimoedas) ---- */
+  .wallet-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:14px; margin-bottom:22px; }
+  .wallet{ border-radius:var(--r-lg); padding:20px; color:#fff; box-shadow:var(--shadow-lg); position:relative; overflow:hidden; }
+  .wallet::after{ content:''; position:absolute; right:-30px; bottom:-30px; width:120px; height:120px; border-radius:50%; background:rgba(255,255,255,0.08); }
+  .wallet .wf{ font-size:26px; }
+  .wallet .wc{ font-size:12px; opacity:.8; margin:8px 0 2px; letter-spacing:.05em; }
+  .wallet .wa{ font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:600; }
+  .wallet .wbrl{ font-size:11.5px; opacity:.7; margin-top:3px; }
+
+  /* ---- shopping / cashback marketplace ---- */
+  .shop-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+  .shop{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); padding:18px 20px; box-shadow:var(--shadow-sm); display:flex; flex-direction:column; }
+  .shop .srow{ display:flex; align-items:center; gap:11px; margin-bottom:12px; }
+  .shop .slogo{ width:42px; height:42px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0; background:var(--paper-dim); }
+  .shop b{ font-size:14px; display:block; }
+  .shop .cat2{ font-size:11.5px; color:var(--muted); }
+  .shop .cbk{ font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:600; color:var(--sea); margin-bottom:12px; }
+  .shop .cbk small{ font-size:11.5px; color:var(--muted); font-weight:400; font-family:'Inter',sans-serif; }
+  .shop button{ all:unset; cursor:pointer; text-align:center; border-radius:10px; padding:9px; font-size:12.5px; font-weight:600; background:var(--ink); color:var(--paper); }
+  body.dark .shop button{ background:var(--copper); color:var(--void); }
+  .shop.on button{ background:transparent; color:var(--sea); border:1px solid var(--sea); }
+
+  /* ---- acessibilidade ---- */
+  .a11y-card{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow-sm); padding:6px 0; max-width:440px; margin-top:16px; }
+  .a11y-row{ display:flex; align-items:center; justify-content:space-between; padding:14px 22px; border-bottom:1px solid var(--line); }
+  .a11y-row:last-child{ border-bottom:none; }
+  .a11y-row .lbl2{ font-size:13.5px; }
+  .a11y-row .lbl2 small{ display:block; font-size:11.5px; color:var(--muted); margin-top:2px; }
+  .font-seg{ display:flex; border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .font-seg button{ all:unset; cursor:pointer; padding:7px 12px; font-size:12px; font-weight:600; background:var(--paper); }
+  .font-seg button.sel{ background:var(--ink); color:var(--paper); }
+  body.dark .font-seg button.sel{ background:var(--copper); color:var(--void); }
+  body.contrast{ --line:rgba(27,23,38,0.24); --muted:#4A4557; }
+  body.dark.contrast{ --line:rgba(255,255,255,0.24); --muted:#B4AEC6; }
+
+  /* ---- CDI tag (inspiração BDU) ---- */
+  .cdi-tag{ display:inline-flex; align-items:center; gap:8px; font-size:12px; font-weight:600; color:var(--sea); background:rgba(62,156,130,0.12); border-radius:20px; padding:6px 13px; margin:-8px 0 24px; }
+  .cdi-tag .pulse{ width:8px; height:8px; border-radius:50%; background:var(--sea); position:relative; }
+  .cdi-tag .pulse::after{ content:''; position:absolute; inset:0; border-radius:50%; background:var(--sea); animation:pulse 1.8s ease-out infinite; }
+  @keyframes pulse{ 0%{ transform:scale(1); opacity:.6;} 100%{ transform:scale(3); opacity:0;} }
+
+  /* ---- minhas chaves pix ---- */
+  .keys-list{ display:flex; flex-direction:column; gap:10px; }
+  .key-item{ display:flex; align-items:center; gap:12px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 16px; box-shadow:var(--shadow-sm); }
+  .key-item .ktag{ font-size:10.5px; font-weight:700; text-transform:uppercase; letter-spacing:.04em; color:var(--copper); background:rgba(198,135,63,0.14); border-radius:7px; padding:4px 9px; flex-shrink:0; }
+  .key-item .kval{ flex:1; font-family:'JetBrains Mono',monospace; font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .key-item .kdel{ all:unset; cursor:pointer; color:var(--muted); }
+  .key-item .kdel:hover{ color:var(--coral); }
+  .key-item .kdel svg{ width:16px; height:16px; }
+
+  /* ---- parcelamento fatura ---- */
+  .inst-options{ display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:10px; }
+  .inst-opt{ all:unset; cursor:pointer; text-align:center; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-md); padding:14px 8px; box-shadow:var(--shadow-sm); transition:border-color .12s, transform .12s; }
+  .inst-opt:hover{ transform:translateY(-2px); border-color:var(--copper); }
+  .inst-opt.sel{ border-color:var(--copper); background:color-mix(in srgb, var(--copper) 8%, var(--card-bg)); }
+  .inst-opt b{ font-family:'JetBrains Mono',monospace; font-size:15px; display:block; }
+  .inst-opt small{ font-size:10.5px; color:var(--muted); }
+
+  /* ---- segurança ---- */
+  .sec-score{ display:flex; align-items:center; gap:20px; background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px 24px; box-shadow:var(--shadow-sm); }
+  .ring-wrap{ position:relative; width:86px; height:86px; flex-shrink:0; }
+  .ring-c{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  .ring-c b{ font-family:'JetBrains Mono',monospace; font-size:20px; }
+  .ring-c span{ font-size:10px; color:var(--muted); }
+
+  /* ---- suporte / faq ---- */
+  .faq-list{ display:flex; flex-direction:column; gap:10px; }
+  .faq{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-md); box-shadow:var(--shadow-sm); overflow:hidden; }
+  .faq .fq{ display:flex; align-items:center; justify-content:space-between; padding:15px 18px; cursor:pointer; font-size:13.5px; font-weight:600; }
+  .faq .fq svg{ width:16px; height:16px; color:var(--muted); transition:transform .2s; }
+  .faq.open .fq svg{ transform:rotate(180deg); }
+  .faq .fa{ max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .faq.open .fa{ max-height:200px; }
+  .faq .fa p{ padding:0 18px 15px; margin:0; font-size:12.5px; color:var(--muted); line-height:1.55; }
+  .tk-badge{ font-size:10.5px; font-weight:700; padding:3px 9px; border-radius:20px; }
+  .tk-badge.aberto{ background:rgba(216,169,59,0.18); color:var(--gold); }
+  .tk-badge.andamento{ background:rgba(123,108,217,0.16); color:var(--violet); }
+
+  /* ---- onboarding ---- */
+  .onb{ position:fixed; inset:0; z-index:210; display:flex; flex-direction:column; color:#fff; overflow:hidden;
+    background:radial-gradient(120% 90% at 80% -10%, #3E9C82 0%, #1C7A63 24%, #14111C 62%); transition:opacity .45s, visibility .45s; }
+  .onb.hide{ opacity:0; visibility:hidden; }
+  .onb-top{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; }
+  .onb-slide{ position:absolute; text-align:center; padding:0 30px; max-width:440px; opacity:0; transform:translateY(14px); transition:opacity .5s, transform .5s; pointer-events:none; }
+  .onb-slide.on{ opacity:1; transform:translateY(0); pointer-events:auto; }
+  .onb-ico{ width:96px; height:96px; border-radius:28px; margin:0 auto 26px; display:flex; align-items:center; justify-content:center; font-size:46px; background:rgba(255,255,255,0.1); backdrop-filter:blur(6px); box-shadow:0 20px 60px rgba(0,0,0,0.3); animation:floaty 3s ease-in-out infinite; }
+  @keyframes floaty{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-10px);} }
+  .onb-slide h2{ font-size:28px; margin-bottom:12px; letter-spacing:-0.02em; }
+  .onb-slide p{ font-size:15px; color:rgba(255,255,255,0.72); line-height:1.5; margin:0; }
+  .onb-bot{ padding:24px 28px 40px; }
+  .onb-dots{ display:flex; gap:8px; justify-content:center; margin-bottom:22px; }
+  .onb-dots i{ width:8px; height:8px; border-radius:50%; background:rgba(255,255,255,0.28); transition:width .3s, background .3s; }
+  .onb-dots i.on{ width:24px; background:#fff; }
+  .onb-actions{ display:flex; align-items:center; justify-content:space-between; max-width:440px; margin:0 auto; }
+  .onb-skip{ all:unset; cursor:pointer; color:rgba(255,255,255,0.6); font-size:13.5px; }
+  .onb-next{ all:unset; cursor:pointer; background:#fff; color:#14111C; font-weight:700; font-size:14.5px; padding:14px 30px; border-radius:30px; display:inline-flex; align-items:center; gap:8px; box-shadow:0 10px 30px rgba(0,0,0,0.25); }
+  .onb-next:hover{ filter:brightness(0.95); }
+
+  /* refino neumórfico suave nos cartões-ação */
+  .quick-actions button{ background:linear-gradient(160deg, color-mix(in srgb, var(--card-bg) 96%, #fff) 0%, var(--card-bg) 100%); }
+
   @media (max-width:820px){
     .analytics-grid{ grid-template-columns:1fr; }
+    .proj-stats{ grid-template-columns:1fr; }
   }
   @media (max-width:760px){
     .app{ flex-direction:column; }
@@ -513,6 +633,18 @@
   <div class="dots" id="lock-dots"><i></i><i></i><i></i><i></i></div>
   <div class="keypad" id="keypad"></div>
   <button class="lskip" onclick="unlock(true)">Entrar sem PIN (demo)</button>
+</div>
+
+<!-- onboarding -->
+<div class="onb" id="onb">
+  <div class="onb-top" id="onb-top"></div>
+  <div class="onb-bot">
+    <div class="onb-dots" id="onb-dots"></div>
+    <div class="onb-actions">
+      <button class="onb-skip" onclick="finishOnb()">Pular</button>
+      <button class="onb-next" id="onb-next" onclick="nextOnb()">Continuar →</button>
+    </div>
+  </div>
 </div>
 
 <!-- notifications sheet -->
@@ -559,9 +691,14 @@
       <button data-view="dividir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 15c2.5.3 4.5 2 4.5 4.5"/></svg> Dividir</button>
       <button data-view="seguros"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M9 12l2 2 4-4"/></svg> Seguros</button>
       <button data-view="investimentos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg> Investir</button>
+      <button data-view="projecao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M6 15c4-8 8 0 12-8"/></svg> Projeção</button>
+      <button data-view="global"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg> Global</button>
+      <button data-view="shopping"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2l-2 5h16l-2-5"/><path d="M4 7v12a1 1 0 001 1h14a1 1 0 001-1V7"/><path d="M9 11a3 3 0 006 0"/></svg> Shopping</button>
       <button data-view="openfinance"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg> Open Finance</button>
       <button data-view="cambio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg> Câmbio</button>
       <button data-view="emprestimo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8M12 8v8"/></svg> Empréstimo</button>
+      <button data-view="seguranca"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/><path d="M12 11v3M12 8h.01"/></svg> Segurança</button>
+      <button data-view="suporte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4"/><path d="M12 17h.01"/></svg> Suporte</button>
       <button data-view="perfil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg> Perfil</button>
     </nav>
     <div class="foot">
@@ -618,6 +755,7 @@
         </span>
         <span class="amt" id="balance-display">R$ <span>0,00</span></span>
       </div>
+      <div class="cdi-tag" id="cdi-tag"><span class="pulse"></span> Rende 110% do CDI · seu dinheiro sempre trabalhando</div>
 
       <div class="quick-actions">
         <button onclick="goTo('transferir')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3l4 4-4 4M21 7H3M7 21l-4-4 4-4M3 17h18"/></svg> Transferir</button>
@@ -745,6 +883,7 @@
         <button class="sel" data-mode="chave">Pagar com chave</button>
         <button data-mode="copia">Copia e cola</button>
         <button data-mode="receber">Receber</button>
+        <button data-mode="chaves">Minhas chaves</button>
       </div>
 
       <div class="form-card" id="pix-chave">
@@ -787,6 +926,29 @@
         <div id="qr-code" style="margin:0 auto 18px; width:170px; height:170px;"></div>
         <div style="font-family:'JetBrains Mono',monospace; font-size:13px; background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:11px; margin-bottom:14px;">queren.paloma@crivo.com</div>
         <button class="btn-ghost" onclick="copyKey()"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 012-2h10"/></svg> Copiar chave</button>
+      </div>
+
+      <div id="pix-chaves" style="display:none;">
+        <p style="font-size:13px; color:var(--muted); margin:0 0 16px;">Gerencie as chaves vinculadas à sua conta. Você pode ter até 5 chaves.</p>
+        <div class="keys-list" id="keys-list"></div>
+        <div class="form-card" style="margin-top:16px;">
+          <div class="section-title" style="margin-bottom:14px;">Cadastrar nova chave</div>
+          <div class="field" style="margin-bottom:12px;">
+            <label>Tipo</label>
+            <div class="pix-keys" id="newkey-types">
+              <button class="sel" data-key="CPF">CPF</button>
+              <button data-key="E-mail">E-mail</button>
+              <button data-key="Telefone">Telefone</button>
+              <button data-key="Aleatória">Aleatória</button>
+            </div>
+          </div>
+          <div class="field" id="newkey-field">
+            <label>Valor da chave</label>
+            <input type="text" id="newkey-value" placeholder="Digite o CPF, e-mail ou telefone">
+          </div>
+          <button class="btn-primary" onclick="addPixKey()">Cadastrar chave</button>
+          <div class="msg" id="newkey-msg"></div>
+        </div>
       </div>
     </section>
 
@@ -845,9 +1007,17 @@
       </div>
       <p style="font-size:13px; color:var(--muted); margin:-6px 0 14px;">Limite disponível: <span id="limit-display" class="mono"></span> de R$ 6.000,00</p>
       <div class="progress" style="max-width:430px; margin-bottom:22px;"><i id="limit-bar" style="background:linear-gradient(90deg,var(--copper-soft),var(--copper));"></i></div>
-      <div style="display:flex; gap:10px; margin-bottom:26px; flex-wrap:wrap;">
+      <div style="display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap;">
         <button class="btn-primary" onclick="payInvoice()">Pagar fatura</button>
+        <button class="btn-ghost" onclick="openInstallments()"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18M7 15h4"/></svg> Parcelar fatura</button>
         <button class="btn-ghost" onclick="toggleCardLock()" id="lock-btn"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg> Bloquear cartão</button>
+      </div>
+
+      <div id="installments-box" style="display:none; margin-bottom:26px;">
+        <div class="section-title">Parcelar a fatura</div>
+        <div class="inst-options" id="inst-options"></div>
+        <div class="result-box" id="inst-detail" style="margin-top:14px;"></div>
+        <button class="btn-primary" style="margin-top:14px;" onclick="confirmInstallments()">Confirmar parcelamento</button>
       </div>
 
       <div class="section-title">Cartão virtual <a onclick="newVirtualCard()">Gerar novo</a></div>
@@ -940,6 +1110,71 @@
       <div class="ins-grid" id="ins-grid"></div>
     </section>
 
+    <section class="view" id="projecao">
+      <span class="eyebrow">Simulador de juros compostos</span>
+      <h2 style="margin-bottom:20px;">Projeção</h2>
+      <div class="form-card" style="max-width:none;">
+        <div class="range-row">
+          <div class="rl"><span>Aporte inicial</span><b id="pj-initial-v">R$ 1.000</b></div>
+          <input type="range" id="pj-initial" min="0" max="50000" step="500" value="1000" oninput="calcProj()">
+        </div>
+        <div class="range-row">
+          <div class="rl"><span>Aporte mensal</span><b id="pj-monthly-v">R$ 300</b></div>
+          <input type="range" id="pj-monthly" min="0" max="5000" step="50" value="300" oninput="calcProj()">
+        </div>
+        <div class="range-row">
+          <div class="rl"><span>Rentabilidade (% ao mês)</span><b id="pj-rate-v">0,80%</b></div>
+          <input type="range" id="pj-rate" min="0.1" max="2" step="0.05" value="0.8" oninput="calcProj()">
+        </div>
+        <div class="range-row" style="margin-bottom:0;">
+          <div class="rl"><span>Prazo</span><b id="pj-years-v">10 anos</b></div>
+          <input type="range" id="pj-years" min="1" max="40" step="1" value="10" oninput="calcProj()">
+        </div>
+      </div>
+      <div class="proj-stats" style="margin-top:20px;">
+        <div class="proj-stat"><span>Total investido</span><b id="pj-invested">R$ 0</b></div>
+        <div class="proj-stat hl"><span>Juros ganhos</span><b id="pj-interest">R$ 0</b></div>
+        <div class="proj-stat"><span>Valor final</span><b id="pj-final">R$ 0</b></div>
+      </div>
+      <div class="proj-chart">
+        <svg id="pj-svg" viewBox="0 0 300 160" preserveAspectRatio="none"></svg>
+        <div class="proj-legend">
+          <div class="li"><span class="dot" style="background:var(--copper)"></span> Aportes</div>
+          <div class="li"><span class="dot" style="background:var(--sea)"></span> Com juros compostos</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="view" id="global">
+      <span class="eyebrow">Conta internacional</span>
+      <h2 style="margin-bottom:6px;">Conta Global</h2>
+      <p style="font-size:13px; color:var(--muted); margin:0 0 22px;">Guarde e gaste em outras moedas com a cotação do dia.</p>
+      <div class="wallet-grid" id="wallet-grid"></div>
+      <div class="form-card">
+        <div class="section-title" style="margin-bottom:14px;">Adicionar saldo em moeda</div>
+        <div class="cambio-row">
+          <div class="field" style="margin-bottom:0;">
+            <label>Moeda</label>
+            <select id="gl-cur"></select>
+          </div>
+          <div class="field" style="margin-bottom:0; flex:1;">
+            <label>Valor em R$ a converter</label>
+            <input type="text" id="gl-brl" inputmode="decimal" placeholder="0,00" oninput="calcGlobal()">
+          </div>
+        </div>
+        <div class="cx-result" id="gl-result" style="font-size:18px;">—</div>
+        <button class="btn-primary" style="margin-top:14px;" onclick="addGlobal()">Converter e guardar</button>
+        <div class="msg" id="gl-msg"></div>
+      </div>
+    </section>
+
+    <section class="view" id="shopping">
+      <span class="eyebrow">Shopping com cashback</span>
+      <h2 style="margin-bottom:6px;">Shopping</h2>
+      <p style="font-size:13px; color:var(--muted); margin:0 0 22px;">Ative o cashback antes de comprar nas lojas parceiras.</p>
+      <div class="shop-grid" id="shop-grid"></div>
+    </section>
+
     <section class="view" id="investimentos">
       <span class="eyebrow">Investimentos</span>
       <h2 style="margin-bottom:20px;">Carteira</h2>
@@ -979,6 +1214,69 @@
       </div>
     </section>
 
+    <section class="view" id="seguranca">
+      <span class="eyebrow">Central de segurança</span>
+      <h2 style="margin-bottom:6px;">Segurança</h2>
+      <p style="font-size:13px; color:var(--muted); margin:0 0 22px;">Acompanhe acessos e proteja sua conta.</p>
+
+      <div class="sec-score">
+        <div class="ring-wrap">
+          <svg viewBox="0 0 42 42" width="86" height="86" id="sec-ring"></svg>
+          <div class="ring-c"><b id="sec-pct">0</b><span>seguro</span></div>
+        </div>
+        <div>
+          <b style="font-size:14.5px;">Nível de segurança</b>
+          <p style="font-size:12.5px; color:var(--muted); margin:4px 0 0; line-height:1.5;" id="sec-hint">Ative recursos para reforçar sua proteção.</p>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-top:24px;">Proteções</div>
+      <div class="a11y-card">
+        <div class="a11y-row"><div class="lbl2">Autenticação em duas etapas <small>Código extra ao entrar</small></div><button class="theme-switch" data-sec="2fa" aria-label="2FA"></button></div>
+        <div class="a11y-row"><div class="lbl2">Biometria <small>Face ID / digital</small></div><button class="theme-switch" data-sec="bio" aria-label="Biometria"></button></div>
+        <div class="a11y-row"><div class="lbl2">Alertas de login <small>Avisar novos acessos</small></div><button class="theme-switch" data-sec="alerts" aria-label="Alertas"></button></div>
+      </div>
+
+      <div class="section-title" style="margin-top:24px;">Histórico de acessos</div>
+      <div class="tx-list" id="login-history"></div>
+    </section>
+
+    <section class="view" id="suporte">
+      <span class="eyebrow">Central de ajuda</span>
+      <h2 style="margin-bottom:20px;">Suporte</h2>
+      <div class="seg" id="sup-mode">
+        <button class="sel" data-mode="faq">Perguntas frequentes</button>
+        <button data-mode="chamado">Abrir chamado</button>
+      </div>
+
+      <div id="sup-faq">
+        <div class="faq-list" id="faq-list"></div>
+      </div>
+
+      <div id="sup-chamado" style="display:none;">
+        <div class="form-card">
+          <div class="field">
+            <label>Assunto</label>
+            <select id="tk-subject">
+              <option>Cartão bloqueado</option>
+              <option>Contestação de compra</option>
+              <option>Problema com Pix</option>
+              <option>Dúvida sobre empréstimo</option>
+              <option>Outro assunto</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Descreva o que aconteceu</label>
+            <textarea id="tk-desc" rows="4" placeholder="Conte os detalhes para agilizarmos seu atendimento…"></textarea>
+          </div>
+          <button class="btn-primary" onclick="openTicket()">Enviar chamado</button>
+          <div class="msg" id="tk-msg"></div>
+        </div>
+        <div class="section-title" style="margin-top:24px;">Meus chamados</div>
+        <div class="tx-list" id="ticket-list"></div>
+      </div>
+    </section>
+
     <section class="view" id="perfil">
       <span class="eyebrow">Minha conta</span>
       <h2 style="margin-bottom:20px;">Perfil</h2>
@@ -1001,6 +1299,28 @@
           <button class="theme-switch" id="theme-toggle-2" aria-label="Alternar tema"></button>
         </div>
       </div>
+
+      <div class="section-title" style="margin-top:26px;">Acessibilidade</div>
+      <div class="a11y-card">
+        <div class="a11y-row">
+          <div class="lbl2">Tamanho do texto <small>Aumenta a fonte de todo o app</small></div>
+          <div class="font-seg" id="font-seg">
+            <button data-scale="0.92">A−</button>
+            <button class="sel" data-scale="1">A</button>
+            <button data-scale="1.12">A+</button>
+            <button data-scale="1.25">A++</button>
+          </div>
+        </div>
+        <div class="a11y-row">
+          <div class="lbl2">Alto contraste <small>Reforça bordas e textos secundários</small></div>
+          <button class="theme-switch" id="contrast-toggle" aria-label="Alto contraste"></button>
+        </div>
+        <div class="a11y-row">
+          <div class="lbl2">Exigir PIN ao abrir <small>Tela de bloqueio na próxima vez</small></div>
+          <button class="theme-switch" id="pin-toggle" aria-label="Exigir PIN"></button>
+        </div>
+      </div>
+
       <div style="margin-top:20px;">
         <button class="btn-ghost" onclick="resetData()"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9 9 9 0 00-6.4 2.6L3 8"/><path d="M3 3v5h5"/></svg> Restaurar dados de demonstração</button>
       </div>
@@ -1220,6 +1540,11 @@
     if(view==='orcamento') renderBudget();
     if(view==='dividir') calcSplit();
     if(view==='seguros') renderInsurance();
+    if(view==='projecao') calcProj();
+    if(view==='global') initGlobal();
+    if(view==='shopping') renderShopping();
+    if(view==='seguranca') renderSecurity();
+    if(view==='suporte') renderSupport();
   }
   document.querySelectorAll('nav.tabs button[data-view]').forEach(btn=>{
     btn.addEventListener('click', ()=> goTo(btn.dataset.view));
@@ -1259,6 +1584,8 @@
       document.getElementById('pix-chave').style.display = m==='chave'?'block':'none';
       document.getElementById('pix-copia').style.display = m==='copia'?'block':'none';
       document.getElementById('pix-receber').style.display = m==='receber'?'block':'none';
+      document.getElementById('pix-chaves').style.display = m==='chaves'?'block':'none';
+      if(m==='chaves') renderPixKeys();
     });
   });
   function doPix(){
@@ -2093,15 +2420,363 @@
     else if(e.key==='Enter'){ e.preventDefault(); runCmd(cmdkSel); }
   });
 
+  /* ================= Projeção (juros compostos) ================= */
+  function calcProj(){
+    const initial = +document.getElementById('pj-initial').value;
+    const monthly = +document.getElementById('pj-monthly').value;
+    const rate = +document.getElementById('pj-rate').value / 100;
+    const years = +document.getElementById('pj-years').value;
+    document.getElementById('pj-initial-v').textContent = fmtPlain(initial);
+    document.getElementById('pj-monthly-v').textContent = fmtPlain(monthly);
+    document.getElementById('pj-rate-v').textContent = rate*100 ? (rate*100).toFixed(2).replace('.',',')+'%' : '0%';
+    document.getElementById('pj-years-v').textContent = years + (years>1?' anos':' ano');
+    const months = years*12;
+    const invPts = [], totPts = [];
+    let bal = initial;
+    for(let m=0; m<=months; m++){
+      if(m>0){ bal = bal*(1+rate) + monthly; }
+      const invested = initial + monthly*m;
+      if(m % Math.max(1, Math.floor(months/60)) === 0 || m===months){ invPts.push([m, invested]); totPts.push([m, bal]); }
+    }
+    const invested = initial + monthly*months;
+    const finalV = bal;
+    document.getElementById('pj-invested').textContent = fmtPlain(invested);
+    document.getElementById('pj-interest').textContent = fmtPlain(finalV - invested);
+    document.getElementById('pj-final').textContent = fmtPlain(finalV);
+    // chart
+    const W=300,H=160, maxY=Math.max(finalV,1), maxX=months||1;
+    const path = pts=> pts.map((p,i)=>{ const x=(p[0]/maxX)*W; const y=H-(p[1]/maxY)*(H-8)-4; return (i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1); }).join(' ');
+    const areaT = path(totPts) + ` L${W} ${H} L0 ${H} Z`;
+    document.getElementById('pj-svg').innerHTML =
+      `<path d="${areaT}" fill="rgba(62,156,130,0.14)"/>`+
+      `<path d="${path(invPts)}" fill="none" stroke="var(--copper)" stroke-width="2" stroke-dasharray="4 3"/>`+
+      `<path d="${path(totPts)}" fill="none" stroke="var(--sea)" stroke-width="2.5"/>`;
+  }
+
+  /* ================= Conta Global (multimoedas) ================= */
+  if(!state.wallets){ state.wallets = { USD:0, EUR:0, GBP:0 }; save(); }
+  const WALLET_META = { USD:{flag:'🇺🇸', bg:'linear-gradient(150deg,#3E9C82,#1C2A3A)'}, EUR:{flag:'🇪🇺', bg:'linear-gradient(150deg,#7B6CD9,#2A2438)'}, GBP:{flag:'🇬🇧', bg:'linear-gradient(150deg,#C6873F,#2A2438)'} };
+  let glReady = false;
+  function initGlobal(){
+    if(!glReady){
+      glReady = true;
+      const opts = Object.keys(state.wallets).map(c=>{ const cu=currencies.find(x=>x.code===c); return `<option value="${c}">${cu?cu.flag:''} ${c}</option>`; }).join('');
+      document.getElementById('gl-cur').innerHTML = opts;
+      document.getElementById('gl-cur').onchange = calcGlobal;
+    }
+    renderWallets(); calcGlobal();
+  }
+  function renderWallets(){
+    document.getElementById('wallet-grid').innerHTML = Object.keys(state.wallets).map(c=>{
+      const cu = currencies.find(x=>x.code===c);
+      const brl = state.wallets[c]*(cu?cu.rate:0);
+      const m = WALLET_META[c];
+      return `<div class="wallet" style="background:${m.bg}">
+        <div class="wf">${m.flag}</div>
+        <div class="wc">${c} · saldo</div>
+        <div class="wa">${state.wallets[c].toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}</div>
+        <div class="wbrl">≈ ${fmtPlain(brl)}</div></div>`;
+    }).join('');
+  }
+  function calcGlobal(){
+    const c = document.getElementById('gl-cur').value;
+    const brl = parseAmount(document.getElementById('gl-brl').value) || 0;
+    const cu = currencies.find(x=>x.code===c);
+    const res = document.getElementById('gl-result');
+    if(!cu || brl<=0){ res.textContent='—'; return; }
+    const got = brl/cu.rate*(1-0.035);
+    res.innerHTML = fmtPlain(brl) + ' = <b>' + got.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' ' + c + '</b>';
+  }
+  function addGlobal(){
+    const c = document.getElementById('gl-cur').value;
+    const brl = parseAmount(document.getElementById('gl-brl').value) || 0;
+    const cu = currencies.find(x=>x.code===c);
+    const msg = document.getElementById('gl-msg');
+    if(brl<=0){ msg.className='msg err'; msg.textContent='Informe o valor a converter.'; return; }
+    if(brl > state.balance){ msg.className='msg err'; msg.textContent='Saldo insuficiente.'; toast('Saldo insuficiente','Conversão não feita.','err'); return; }
+    const got = brl/cu.rate*(1-0.035);
+    state.wallets[c] += got;
+    addTx('Conversão para ' + c, -brl, 'Transferências');
+    save(); renderWallets(); calcGlobal();
+    document.getElementById('gl-brl').value='';
+    msg.className='msg ok'; msg.textContent='Guardado ' + got.toFixed(2).replace('.',',') + ' ' + c + ' na sua conta global.';
+    toast('Conta global 🌍', got.toFixed(2).replace('.',',') + ' ' + c + ' adicionados');
+  }
+
+  /* ================= Shopping / cashback ================= */
+  const SHOPS = [
+    { key:'moda', emoji:'👗', name:'Estilo & Co', cat:'Moda', cbk:8 },
+    { key:'tech', emoji:'💻', name:'TechStore', cat:'Eletrônicos', cbk:5 },
+    { key:'mercado', emoji:'🛒', name:'SuperMax', cat:'Mercado', cbk:3 },
+    { key:'viagem', emoji:'🏨', name:'ViajaBem', cat:'Viagens', cbk:12 },
+    { key:'farma', emoji:'💊', name:'SaúdeFarma', cat:'Farmácia', cbk:6 },
+    { key:'games', emoji:'🎮', name:'GameOn', cat:'Games', cbk:10 },
+    { key:'beleza', emoji:'💄', name:'Belezura', cat:'Beleza', cbk:9 },
+    { key:'livros', emoji:'📚', name:'Leituras', cat:'Livraria', cbk:7 },
+  ];
+  if(!state.shopsOn){ state.shopsOn = []; save(); }
+  function renderShopping(){
+    document.getElementById('shop-grid').innerHTML = SHOPS.map(s=>{
+      const on = state.shopsOn.includes(s.key);
+      return `<div class="shop ${on?'on':''}">
+        <div class="srow"><div class="slogo">${s.emoji}</div><div><b>${s.name}</b><div class="cat2">${s.cat}</div></div></div>
+        <div class="cbk">${s.cbk}% <small>de cashback</small></div>
+        <button onclick="toggleShop('${s.key}')">${on?'✓ Cashback ativo':'Ativar cashback'}</button>
+      </div>`;
+    }).join('');
+  }
+  function toggleShop(key){
+    const s = SHOPS.find(x=>x.key===key);
+    const idx = state.shopsOn.indexOf(key);
+    if(idx>=0){ state.shopsOn.splice(idx,1); save(); renderShopping(); toast('Cashback desativado', s.name, 'info'); }
+    else{
+      state.shopsOn.push(key); save(); renderShopping();
+      pushNoti('star','Cashback ativado', s.cbk+'% de volta em compras na '+s.name+'.');
+      toast('Cashback ativo '+s.emoji, s.name+' • '+s.cbk+'% de volta');
+    }
+  }
+
+  /* ================= Acessibilidade ================= */
+  const A11Y_KEY = 'crivo_a11y';
+  let a11y = { scale:1, contrast:false };
+  try{ const raw=localStorage.getItem(A11Y_KEY); if(raw) a11y=Object.assign(a11y, JSON.parse(raw)); }catch(e){}
+  function applyA11y(){
+    document.documentElement.style.zoom = a11y.scale;
+    document.body.classList.toggle('contrast', !!a11y.contrast);
+    document.querySelectorAll('#font-seg button').forEach(b=> b.classList.toggle('sel', +b.dataset.scale===a11y.scale));
+    const ct = document.getElementById('contrast-toggle'); if(ct) ct.classList.toggle('on', !!a11y.contrast);
+  }
+  function saveA11y(){ try{ localStorage.setItem(A11Y_KEY, JSON.stringify(a11y)); }catch(e){} }
+  document.querySelectorAll('#font-seg button').forEach(b=>{
+    b.addEventListener('click', ()=>{ a11y.scale = +b.dataset.scale; saveA11y(); applyA11y(); });
+  });
+  document.getElementById('contrast-toggle').addEventListener('click', function(){
+    a11y.contrast = !a11y.contrast; this.classList.toggle('on', a11y.contrast); saveA11y(); applyA11y();
+  });
+  // contrast toggle visual (reuse theme-switch style: use ::after position via .on)
+  (function(){ const s=document.createElement('style'); s.textContent='.theme-switch.on::after{ left:18px; }'; document.head.appendChild(s); })();
+
+  // exigir PIN
+  const pinToggle = document.getElementById('pin-toggle');
+  function refreshPinToggle(){ let f; try{ f=localStorage.getItem('crivo_lock'); }catch(e){} pinToggle.classList.toggle('on', f!=='0'); }
+  pinToggle.addEventListener('click', ()=>{
+    let f; try{ f=localStorage.getItem('crivo_lock'); }catch(e){}
+    const now = (f==='0') ? '1' : '0';
+    try{ localStorage.setItem('crivo_lock', now); }catch(e){}
+    refreshPinToggle();
+    toast(now==='0'?'PIN desativado':'PIN ativado', now==='0'?'Não pediremos PIN ao abrir.':'Pediremos PIN na próxima abertura.','info');
+  });
+
+  /* ================= Minhas chaves Pix ================= */
+  if(!state.pixKeys){ state.pixKeys = [
+    { type:'E-mail', value:'queren.paloma@crivo.com' },
+    { type:'CPF', value:'***.456.789-**' },
+  ]; save(); }
+  let newKeyType = 'CPF';
+  document.querySelectorAll('#newkey-types button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('#newkey-types button').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel'); newKeyType = b.dataset.key;
+      const inp = document.getElementById('newkey-value');
+      if(newKeyType==='Aleatória'){ inp.value=''; inp.placeholder='Gerada automaticamente'; inp.disabled=true; }
+      else{ inp.disabled=false; inp.placeholder = newKeyType==='CPF'?'000.000.000-00':(newKeyType==='E-mail'?'seu@email.com':'(11) 90000-0000'); }
+    });
+  });
+  function renderPixKeys(){
+    document.getElementById('keys-list').innerHTML = state.pixKeys.length ? state.pixKeys.map((k,i)=>`
+      <div class="key-item"><span class="ktag">${k.type}</span><span class="kval">${k.value}</span>
+      <button class="kdel" onclick="delPixKey(${i})" aria-label="Excluir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg></button></div>`).join('')
+      : '<div class="tx-empty">Nenhuma chave cadastrada ainda.</div>';
+  }
+  function addPixKey(){
+    const msg = document.getElementById('newkey-msg');
+    if(state.pixKeys.length>=5){ msg.className='msg err'; msg.textContent='Limite de 5 chaves atingido.'; return; }
+    let value = document.getElementById('newkey-value').value.trim();
+    if(newKeyType==='Aleatória'){
+      let seed=(state.pixKeys.length*97+7)*2654435761%1e9; const hex='0123456789abcdef'; let s='';
+      for(let i=0;i<32;i++){ seed=(seed*1103515245+12345)&0x7fffffff; s+=hex[seed%16]; if([7,11,15,19].includes(i))s+='-'; }
+      value = s;
+    }
+    if(!value){ msg.className='msg err'; msg.textContent='Informe o valor da chave.'; return; }
+    if(state.pixKeys.some(k=>k.value===value)){ msg.className='msg err'; msg.textContent='Essa chave já está cadastrada.'; return; }
+    state.pixKeys.push({ type:newKeyType, value }); save(); renderPixKeys();
+    document.getElementById('newkey-value').value='';
+    msg.className='msg ok'; msg.textContent='Chave '+newKeyType+' cadastrada com sucesso.';
+    pushNoti('shield','Chave Pix cadastrada', newKeyType+' vinculada à sua conta.');
+    toast('Chave cadastrada 🔑', newKeyType);
+  }
+  function delPixKey(i){
+    const k = state.pixKeys[i];
+    state.pixKeys.splice(i,1); save(); renderPixKeys();
+    toast('Chave removida', k.type, 'info');
+  }
+
+  /* ================= Parcelamento da fatura ================= */
+  const INST_PLANS = [1,2,3,6,10,12];
+  let instSel = 3;
+  function openInstallments(){
+    const box = document.getElementById('installments-box');
+    const show = box.style.display==='none';
+    box.style.display = show?'block':'none';
+    if(show) renderInstallments();
+  }
+  function renderInstallments(){
+    document.getElementById('inst-options').innerHTML = INST_PLANS.map(n=>{
+      const rate = n<=1?0:0.0299;
+      const val = n<=1?invoiceTotal : (invoiceTotal*rate)/(1-Math.pow(1+rate,-n));
+      return `<button class="inst-opt ${n===instSel?'sel':''}" onclick="selInst(${n})">
+        <b>${n}x</b><small>${n<=1?'à vista':fmtPlain(val)}</small></button>`;
+    }).join('');
+    const n = instSel, rate = n<=1?0:0.0299;
+    const val = n<=1?invoiceTotal : (invoiceTotal*rate)/(1-Math.pow(1+rate,-n));
+    const total = val*n;
+    document.getElementById('inst-detail').innerHTML = `
+      <div class="row"><span>Valor da fatura</span><span>${fmtPlain(invoiceTotal)}</span></div>
+      <div class="row"><span>Parcelas</span><span>${n}x de ${fmtPlain(val)}</span></div>
+      <div class="row"><span>Juros</span><span>${n<=1?'isento':'2,99% a.m.'}</span></div>
+      <div class="row"><span>Total ${n<=1?'':'com juros'}</span><span>${fmtPlain(total)}</span></div>`;
+  }
+  function selInst(n){ instSel = n; renderInstallments(); }
+  function confirmInstallments(){
+    const n = instSel, rate = n<=1?0:0.0299;
+    const val = n<=1?invoiceTotal : (invoiceTotal*rate)/(1-Math.pow(1+rate,-n));
+    document.getElementById('installments-box').style.display='none';
+    pushNoti('card','Fatura parcelada', n+'x de '+fmtPlain(val)+' no seu cartão.');
+    toast('Fatura parcelada ✅', n+'x de '+fmtPlain(val));
+  }
+
+  /* ================= Segurança ================= */
+  const LOGIN_HISTORY = [
+    { dev:'iPhone 15 · São Paulo', date:'Hoje, 09:41', ok:true },
+    { dev:'Chrome · Windows', date:'Ontem, 21:12', ok:true },
+    { dev:'App Android · Campinas', date:'02/08, 14:30', ok:true },
+    { dev:'Tentativa bloqueada · desconhecido', date:'31/07, 03:20', ok:false },
+  ];
+  if(!state.security){ state.security = { '2fa':true, 'bio':true, 'alerts':false }; save(); }
+  function renderSecurity(){
+    // toggles
+    document.querySelectorAll('[data-sec]').forEach(btn=>{
+      const k = btn.dataset.sec;
+      btn.classList.toggle('on', !!state.security[k]);
+      btn.onclick = ()=>{ state.security[k]=!state.security[k]; save(); btn.classList.toggle('on', state.security[k]); renderSecRing(); toast(state.security[k]?'Ativado':'Desativado', ({'2fa':'Autenticação em 2 etapas','bio':'Biometria','alerts':'Alertas de login'})[k],'info'); };
+    });
+    // history
+    document.getElementById('login-history').innerHTML = LOGIN_HISTORY.map(h=>{
+      const color = h.ok?'var(--sea)':'var(--coral)';
+      const bg = h.ok?'rgba(62,156,130,0.14)':'rgba(200,91,78,0.12)';
+      const svg = h.ok?'<path d="M20 6L9 17l-5-5"/>':'<path d="M18 6L6 18M6 6l12 12"/>';
+      return `<div class="tx-row"><div class="tx-ic" style="background:${bg};color:${color}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${svg}</svg></div>
+        <div class="tx-left"><b>${h.dev}</b><span>${h.date}</span></div></div>`;
+    }).join('');
+    renderSecRing();
+  }
+  function renderSecRing(){
+    const on = Object.values(state.security).filter(Boolean).length;
+    const pct = Math.round((on/3)*100);
+    document.getElementById('sec-pct').textContent = pct;
+    const color = pct>=100?'var(--sea)':pct>=66?'var(--gold)':'var(--coral)';
+    document.getElementById('sec-ring').innerHTML =
+      '<circle cx="21" cy="21" r="15.915" fill="none" stroke="var(--paper-dim)" stroke-width="4"/>'+
+      `<circle cx="21" cy="21" r="15.915" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${pct} ${100-pct}" stroke-dashoffset="25" style="transition:stroke-dasharray .8s ease"/>`;
+    document.getElementById('sec-hint').textContent = pct>=100?'Excelente! Todas as proteções ativas.':'Ative mais recursos para reforçar sua conta.';
+  }
+
+  /* ================= Suporte ================= */
+  const FAQS = [
+    { q:'Como faço um Pix?', a:'Vá em Pix, escolha pagar com chave, copia e cola ou QR, informe o valor e confirme. É instantâneo e gratuito.' },
+    { q:'Como pago minha fatura?', a:'Na aba Cartão você pode pagar a fatura à vista ou parcelar em até 12x. O valor é debitado do seu saldo.' },
+    { q:'Como aumento meu limite?', a:'O limite é revisado automaticamente conforme seu uso. Manter a fatura em dia ajuda a aumentar mais rápido.' },
+    { q:'Esqueci meu PIN, e agora?', a:'No momento o PIN é local (demo). Em Perfil › Acessibilidade você pode desativar a exigência de PIN.' },
+    { q:'É seguro usar o Crivo?', a:'Sim! Ative 2FA, biometria e alertas de login na Central de Segurança para proteção máxima.' },
+  ];
+  if(!state.tickets){ state.tickets = []; save(); }
+  document.querySelectorAll('#sup-mode button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('#sup-mode button').forEach(x=>x.classList.remove('sel'));
+      b.classList.add('sel');
+      const m=b.dataset.mode;
+      document.getElementById('sup-faq').style.display = m==='faq'?'block':'none';
+      document.getElementById('sup-chamado').style.display = m==='chamado'?'block':'none';
+    });
+  });
+  function renderSupport(){
+    document.getElementById('faq-list').innerHTML = FAQS.map((f,i)=>`
+      <div class="faq" id="faq-${i}">
+        <div class="fq" onclick="document.getElementById('faq-${i}').classList.toggle('open')">${f.q}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="fa"><p>${f.a}</p></div>
+      </div>`).join('');
+    renderTickets();
+  }
+  function renderTickets(){
+    const el = document.getElementById('ticket-list');
+    el.innerHTML = state.tickets.length ? state.tickets.map(t=>`
+      <div class="tx-row"><div class="tx-ic" style="background:rgba(123,108,217,0.14);color:var(--violet)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H8l-4 4V5a2 2 0 012-2h13a2 2 0 012 2z"/></svg></div>
+      <div class="tx-left"><b>${t.subject}</b><span>#${t.id} · ${t.date}</span></div>
+      <span class="tk-badge ${t.status==='Aberto'?'aberto':'andamento'}">${t.status}</span></div>`).join('')
+      : '<div class="tx-empty">Você ainda não abriu chamados.</div>';
+  }
+  function openTicket(){
+    const subject = document.getElementById('tk-subject').value;
+    const desc = document.getElementById('tk-desc').value.trim();
+    const msg = document.getElementById('tk-msg');
+    if(desc.length<8){ msg.className='msg err'; msg.textContent='Descreva melhor o que aconteceu.'; return; }
+    const id = 1000 + state.tickets.length + 1;
+    state.tickets.unshift({ id, subject, date: todayStr(), status:'Aberto' });
+    save(); renderTickets();
+    document.getElementById('tk-desc').value='';
+    msg.className='msg ok'; msg.textContent='Chamado #'+id+' aberto! Retornaremos em breve.';
+    pushNoti('shield','Chamado aberto','#'+id+' · '+subject+'. Nossa equipe já foi avisada.');
+    toast('Chamado enviado 🎧','#'+id+' · '+subject);
+  }
+
+  /* ================= Onboarding ================= */
+  const ONB_SLIDES = [
+    { ico:'👋', h:'Bem-vinda ao Crivo', p:'O banco digital que faz seu dinheiro render 110% do CDI, sem tarifas escondidas.' },
+    { ico:'⚡', h:'Pix, pagamentos e mais', p:'Envie Pix, pague boletos, recarregue o celular e divida contas em segundos.' },
+    { ico:'📈', h:'Cuide do seu futuro', p:'Metas, investimentos, projeções e análise de gastos para você evoluir sempre.' },
+    { ico:'🔒', h:'Seguro do seu jeito', p:'Cartão virtual, 2FA, biometria e controle total. Vamos começar?' },
+  ];
+  let onbIdx = 0;
+  function buildOnb(){
+    document.getElementById('onb-top').innerHTML = ONB_SLIDES.map((s,i)=>`
+      <div class="onb-slide ${i===0?'on':''}" data-i="${i}">
+        <div class="onb-ico">${s.ico}</div><h2>${s.h}</h2><p>${s.p}</p></div>`).join('');
+    document.getElementById('onb-dots').innerHTML = ONB_SLIDES.map((s,i)=>`<i class="${i===0?'on':''}"></i>`).join('');
+  }
+  function showOnbSlide(i){
+    document.querySelectorAll('.onb-slide').forEach(el=> el.classList.toggle('on', +el.dataset.i===i));
+    document.querySelectorAll('#onb-dots i').forEach((el,k)=> el.classList.toggle('on', k===i));
+    document.getElementById('onb-next').innerHTML = i===ONB_SLIDES.length-1 ? 'Começar ✨' : 'Continuar →';
+  }
+  function nextOnb(){
+    if(onbIdx < ONB_SLIDES.length-1){ onbIdx++; showOnbSlide(onbIdx); }
+    else finishOnb();
+  }
+  function finishOnb(){
+    document.getElementById('onb').classList.add('hide');
+    try{ localStorage.setItem('crivo_onb','1'); }catch(e){}
+  }
+  function initOnb(){
+    let seen; try{ seen = localStorage.getItem('crivo_onb'); }catch(e){}
+    if(seen){ document.getElementById('onb').classList.add('hide'); return; }
+    buildOnb();
+  }
+
   /* ================= boot ================= */
   function renderAll(){
     renderBalance(); renderTx(); renderCard(); renderInvest();
     renderGoals(); renderInsight(); renderAnalytics(); drawQR();
     renderOpenFinance(); renderRewards(); renderNoti();
-    renderBudget(); renderInsurance();
+    renderBudget(); renderInsurance(); renderShopping();
+    renderSecurity(); renderSupport(); renderPixKeys();
+    applyA11y(); refreshPinToggle();
     (function(){ const h=new Date().getHours(); document.getElementById('tb-hi').textContent = (h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'); })();
   }
+  initOnb();
   initLock();
+  // respeitar preferência de PIN
+  (function(){ let f; try{ f=localStorage.getItem('crivo_lock'); }catch(e){} if(f==='0'){ document.getElementById('lock').classList.add('hide'); } })();
   renderAll();
 </script>
 
