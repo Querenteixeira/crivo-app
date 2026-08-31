@@ -98,9 +98,20 @@
 
   /* MAIN */
   main{ flex:1; padding:38px 44px 60px; max-width:780px; }
-  .view{ display:none; animation:fade .28s ease; }
-  .view.active{ display:block; }
+  .view{ display:none; }
+  .view.active{ display:block; animation:viewIn .4s cubic-bezier(.2,.8,.2,1); }
+  @keyframes viewIn{ from{opacity:0; transform:translateY(14px) scale(.99);} to{opacity:1; transform:translateY(0) scale(1);} }
   @keyframes fade{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  /* stagger nos filhos diretos da view ativa */
+  .view.active > *{ animation:childIn .45s cubic-bezier(.2,.8,.2,1) backwards; }
+  .view.active > *:nth-child(1){ animation-delay:.02s; }
+  .view.active > *:nth-child(2){ animation-delay:.06s; }
+  .view.active > *:nth-child(3){ animation-delay:.10s; }
+  .view.active > *:nth-child(4){ animation-delay:.14s; }
+  .view.active > *:nth-child(5){ animation-delay:.18s; }
+  .view.active > *:nth-child(n+6){ animation-delay:.22s; }
+  @keyframes childIn{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  @media (prefers-reduced-motion: reduce){ .view.active, .view.active > *{ animation:none !important; } }
 
   .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:11px; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); margin-bottom:6px; display:block; }
   .greeting{ font-size:22px; margin-bottom:26px; }
@@ -171,6 +182,36 @@
   .qa-3{ --copper:var(--violet); --copper-soft:#9C8FEA; }
   .qa-4{ --copper:#2E86C1; --copper-soft:#5AA9E6; }
   .qa-5{ --copper:var(--gold); --copper-soft:#E7C766; }
+
+  /* ---- gráfico de evolução do saldo (home) ---- */
+  .bal-chart{ background:var(--card-bg); border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow-sm); padding:16px 18px 12px; margin-bottom:30px; }
+  .bal-chart .bc-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .bal-chart .bc-head b{ font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+  .bal-chart .bc-head .trend{ font-size:12px; font-weight:600; font-family:'JetBrains Mono',monospace; }
+  .bal-chart .bc-head .trend.up{ color:var(--sea); } .bal-chart .bc-head .trend.down{ color:var(--coral); }
+  .bal-chart svg{ width:100%; height:88px; overflow:visible; display:block; }
+  .bal-chart .bc-dot{ transition:opacity .15s; }
+
+  /* ---- Pay to Pay ---- */
+  .p2p-contacts{ display:flex; gap:12px; overflow-x:auto; padding:2px 2px 12px; margin-bottom:6px; scrollbar-width:none; }
+  .p2p-contacts::-webkit-scrollbar{ display:none; }
+  .p2p-contact{ all:unset; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:7px; flex-shrink:0; width:66px; text-align:center; }
+  .p2p-contact .pav{ width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; color:#fff; font-size:18px; border:2px solid transparent; transition:border-color .12s, transform .12s; }
+  .p2p-contact:hover .pav{ transform:translateY(-2px); }
+  .p2p-contact.sel .pav{ border-color:var(--copper); box-shadow:0 0 0 3px color-mix(in srgb, var(--copper) 22%, transparent); }
+  .p2p-contact span{ font-size:11px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; width:100%; }
+  .p2p-contact.sel span{ color:var(--ink); font-weight:600; }
+  .p2p-selected{ display:flex; align-items:center; gap:12px; background:var(--paper); border:1px solid var(--line); border-radius:12px; padding:12px 14px; margin-bottom:16px; }
+  .p2p-selected .pav{ width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-weight:700; font-family:'Bricolage Grotesque',sans-serif; flex-shrink:0; }
+  .p2p-selected b{ font-size:13.5px; display:block; } .p2p-selected span{ font-size:12px; color:var(--muted); }
+
+  /* ---- tema claro vibrante ---- */
+  body.vivid:not(.dark){
+    --paper: color-mix(in srgb, var(--copper) 10%, #F4F1F8);
+    --paper-dim: color-mix(in srgb, var(--copper) 14%, #EAE5F0);
+    --card-bg:#FFFFFF;
+  }
+  body.vivid:not(.dark) .rail{ background:linear-gradient(180deg, color-mix(in srgb, var(--copper) 42%, #14111C), #14111C); }
 
   .section-title{ font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; display:flex; align-items:center; justify-content:space-between; }
   .section-title a{ font-weight:600; color:var(--copper); cursor:pointer; text-transform:none; letter-spacing:0; }
@@ -724,6 +765,7 @@
       <button data-view="assistente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H8l-4 4V5a2 2 0 012-2h13a2 2 0 012 2z"/><path d="M9 10h.01M13 10h.01M17 10h.01"/></svg> Assistente</button>
       <button data-view="transferir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3l4 4-4 4M21 7H3M7 21l-4-4 4-4M3 17h18"/></svg> Transferir</button>
       <button data-view="pix"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg> Pix</button>
+      <button data-view="paytopay"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="15" r="3"/><path d="M11 9h3a3 3 0 013 3M13 15h-3a3 3 0 01-3-3"/></svg> Pay to Pay</button>
       <button data-view="pagar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 7h20v10a2 2 0 01-2 2H4a2 2 0 01-2-2z"/><path d="M6 11h6"/></svg> Pagar</button>
       <button data-view="cartao"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg> Cartão</button>
       <button data-view="metas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3"/></svg> Metas</button>
@@ -797,6 +839,11 @@
         <span class="amt" id="balance-display">R$ <span>0,00</span></span>
       </div>
       <div class="cdi-tag" id="cdi-tag"><span class="pulse"></span> Rende 110% do CDI · seu dinheiro sempre trabalhando</div>
+
+      <div class="bal-chart">
+        <div class="bc-head"><b>Evolução do saldo</b><span class="trend" id="bal-trend">—</span></div>
+        <svg id="bal-svg" viewBox="0 0 300 88" preserveAspectRatio="none"></svg>
+      </div>
 
       <div class="quick-actions">
         <button onclick="goTo('pix')"><span class="qi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span> Pix</button>
@@ -1022,6 +1069,29 @@
           <button class="btn-primary" onclick="addPixKey()">Cadastrar chave</button>
           <div class="msg" id="newkey-msg"></div>
         </div>
+      </div>
+    </section>
+
+    <section class="view" id="paytopay">
+      <span class="eyebrow">Pagamento entre pessoas</span>
+      <h2 style="margin-bottom:6px;">Pay to Pay</h2>
+      <p style="font-size:13px; color:var(--muted); margin:0 0 18px;">Pague ou cobre outro usuário Crivo pelo @usuário, na hora.</p>
+      <div class="p2p-contacts" id="p2p-contacts"></div>
+      <div class="form-card">
+        <div id="p2p-selected-box"></div>
+        <div class="field">
+          <label>Valor (R$)</label>
+          <input type="text" id="p2p-amount" inputmode="decimal" placeholder="0,00">
+        </div>
+        <div class="field">
+          <label>Mensagem (opcional)</label>
+          <input type="text" id="p2p-note" placeholder="Ex: dividir o jantar 🍕">
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="btn-primary" onclick="doP2P('pay')"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> Pagar</button>
+          <button class="btn-ghost" onclick="doP2P('charge')">Cobrar</button>
+        </div>
+        <div class="msg" id="p2p-msg"></div>
       </div>
     </section>
 
@@ -1398,6 +1468,10 @@
           <button class="theme-switch" id="contrast-toggle" aria-label="Alto contraste"></button>
         </div>
         <div class="a11y-row">
+          <div class="lbl2">Fundo vibrante <small>Tom colorido no tema claro</small></div>
+          <button class="theme-switch" id="vivid-toggle" aria-label="Fundo vibrante"></button>
+        </div>
+        <div class="a11y-row">
           <div class="lbl2">Exigir PIN ao abrir <small>Tela de bloqueio na próxima vez</small></div>
           <button class="theme-switch" id="pin-toggle" aria-label="Exigir PIN"></button>
         </div>
@@ -1622,6 +1696,7 @@
     state.balance += amount;
     save();
     renderBalance(); renderTx(); renderInsight(); renderAnalytics();
+    if(typeof renderBalChart === 'function') renderBalChart();
     if(typeof pushNoti === 'function'){
       pushNoti(amount>=0?'in':'card', amount>=0?'Entrada na conta':'Saída registrada', name + ' • ' + fmt(amount) + '. Saldo: ' + fmtPlain(state.balance) + '.');
     }
@@ -1646,7 +1721,8 @@
     if(view==='seguranca') renderSecurity();
     if(view==='suporte') renderSupport();
     if(view==='adicionar') drawDepQR();
-    if(view==='inicio') renderBalance(true);
+    if(view==='paytopay') renderP2P();
+    if(view==='inicio'){ renderBalance(true); renderBalChart(); }
   }
   document.querySelectorAll('nav.tabs button[data-view]').forEach(btn=>{
     btn.addEventListener('click', ()=> goTo(btn.dataset.view));
@@ -2488,6 +2564,7 @@
     { label:'Transferir', sub:'TED / DOC', view:'transferir', svg:'<path d="M17 3l4 4-4 4M21 7H3"/>' },
     { label:'Pix', sub:'Enviar ou receber', view:'pix', svg:'<path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/>' },
     { label:'Adicionar dinheiro', sub:'Depósito via Pix ou boleto', view:'adicionar', svg:'<circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/>' },
+    { label:'Pay to Pay', sub:'Pagar ou cobrar um usuário', view:'paytopay', svg:'<circle cx="8" cy="9" r="3"/><circle cx="17" cy="15" r="3"/>' },
     { label:'Segurança', sub:'Acessos e proteções', view:'seguranca', svg:'<path d="M12 2l8 3v6c0 5-3.5 8-8 11-4.5-3-8-6-8-11V5z"/>' },
     { label:'Suporte', sub:'FAQ e chamados', view:'suporte', svg:'<circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 015.8 1c0 2-3 2.5-3 4"/>' },
     { label:'Pagar', sub:'Boleto e recarga', view:'pagar', svg:'<path d="M2 7h20v10H2z"/><path d="M6 11h6"/>' },
@@ -2913,6 +2990,84 @@
     if(btn) btn.click();
   }
 
+  /* ================= Gráfico de evolução do saldo ================= */
+  function renderBalChart(){
+    // série de saldos ao longo do tempo, do mais antigo ao atual
+    let run = state.balance;
+    const seq = [run];
+    state.transactions.forEach(t=>{ run -= t.amount; seq.push(run); });
+    seq.reverse();
+    const pts = seq.slice(-16);
+    if(pts.length<2){ document.getElementById('bal-svg').innerHTML=''; document.getElementById('bal-trend').textContent='—'; return; }
+    const W=300, H=88, pad=6;
+    const min=Math.min(...pts), max=Math.max(...pts), range=(max-min)||1;
+    const x = i=> (i/(pts.length-1))*W;
+    const y = v=> H-pad-((v-min)/range)*(H-pad*2);
+    const line = pts.map((v,i)=> (i?'L':'M')+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
+    const area = line + ` L${W} ${H} L0 ${H} Z`;
+    const last=pts[pts.length-1], first=pts[0];
+    const up = last>=first;
+    const col = up? 'var(--sea)' : 'var(--coral)';
+    document.getElementById('bal-svg').innerHTML =
+      `<defs><linearGradient id="bcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity="0.22"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient></defs>`+
+      `<path d="${area}" fill="url(#bcg)"/>`+
+      `<path d="${line}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`+
+      `<circle class="bc-dot" cx="${x(pts.length-1).toFixed(1)}" cy="${y(last).toFixed(1)}" r="3.5" fill="${col}"/>`;
+    const delta = last - first;
+    const tr = document.getElementById('bal-trend');
+    tr.className = 'trend ' + (up?'up':'down');
+    tr.textContent = (up?'▲ +':'▼ -') + fmtPlain(delta) + ' no período';
+  }
+
+  /* ================= Pay to Pay ================= */
+  const P2P_CONTACTS = [
+    { name:'Marina Alves', handle:'@marina', color:'#7B6CD9', ini:'MA' },
+    { name:'João Pedro', handle:'@jpedro', color:'#2E86C1', ini:'JP' },
+    { name:'Bruna Costa', handle:'@brunac', color:'#20A96A', ini:'BC' },
+    { name:'Rafael Dias', handle:'@rafa', color:'#D6608A', ini:'RD' },
+    { name:'Lucas Melo', handle:'@lucasm', color:'#C6873F', ini:'LM' },
+    { name:'Ana Beatriz', handle:'@anabia', color:'#C85B4E', ini:'AB' },
+  ];
+  let p2pSel = 0;
+  function renderP2P(){
+    document.getElementById('p2p-contacts').innerHTML = P2P_CONTACTS.map((c,i)=>`
+      <button class="p2p-contact ${i===p2pSel?'sel':''}" onclick="selP2P(${i})">
+        <span class="pav" style="background:${c.color}">${c.ini}</span><span>${c.name.split(' ')[0]}</span></button>`).join('');
+    const c = P2P_CONTACTS[p2pSel];
+    document.getElementById('p2p-selected-box').innerHTML = `
+      <div class="p2p-selected"><span class="pav" style="background:${c.color}">${c.ini}</span>
+      <div><b>${c.name}</b><span>${c.handle} · Crivo</span></div></div>`;
+  }
+  function selP2P(i){ p2pSel=i; renderP2P(); }
+  function doP2P(kind){
+    const c = P2P_CONTACTS[p2pSel];
+    const amount = parseAmount(document.getElementById('p2p-amount').value);
+    const note = document.getElementById('p2p-note').value.trim();
+    const msg = document.getElementById('p2p-msg');
+    if(isNaN(amount) || amount<=0){ msg.className='msg err'; msg.textContent='Informe um valor válido.'; return; }
+    const suffix = note? ' · '+note : '';
+    if(kind==='pay'){
+      if(amount > state.balance){ msg.className='msg err'; msg.textContent='Saldo insuficiente.'; toast('Saldo insuficiente','Pagamento não feito.','err'); return; }
+      addTx('Pay to Pay — ' + c.handle + suffix, -amount, 'Transferências');
+      msg.className='msg ok'; msg.textContent='Pagamento de '+fmt(amount)+' enviado para '+c.name+'.';
+      toast('Pagamento enviado 💸', fmt(amount)+' → '+c.name);
+    } else {
+      msg.className='msg ok'; msg.textContent='Cobrança de '+fmt(amount)+' enviada para '+c.name+'.';
+      pushNoti('in','Cobrança enviada', 'Você cobrou '+fmt(amount)+' de '+c.name+'.');
+      toast('Cobrança enviada 🧾', fmt(amount)+' ← '+c.name);
+    }
+    document.getElementById('p2p-amount').value=''; document.getElementById('p2p-note').value='';
+  }
+
+  /* ================= tema claro vibrante ================= */
+  (function(){
+    const t = document.getElementById('vivid-toggle');
+    function apply(on){ document.body.classList.toggle('vivid', on); t.classList.toggle('on', on); }
+    let v; try{ v=localStorage.getItem('crivo_vivid')==='1'; }catch(e){}
+    apply(!!v);
+    t.addEventListener('click', ()=>{ const on=!document.body.classList.contains('vivid'); try{ localStorage.setItem('crivo_vivid', on?'1':'0'); }catch(e){} apply(on); });
+  })();
+
   /* ================= boot ================= */
   function renderAll(){
     renderBalance(); renderTx(); renderCard(); renderInvest();
@@ -2920,6 +3075,7 @@
     renderOpenFinance(); renderRewards(); renderNoti();
     renderBudget(); renderInsurance(); renderShopping();
     renderSecurity(); renderSupport(); renderPixKeys();
+    renderBalChart(); renderP2P();
     applyA11y(); refreshPinToggle();
     (function(){ const h=new Date().getHours(); document.getElementById('tb-hi').textContent = (h<12?'Bom dia':h<18?'Boa tarde':'Boa noite'); })();
   }
